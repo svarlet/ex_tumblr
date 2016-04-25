@@ -3,6 +3,8 @@ defmodule ExTumblr.Mixfile do
 
   def project do
     [app: :ex_tumblr,
+     name: "ExTumblr",
+     source_url: "https://github.com/svarlet/ex_tumblr",
      version: "0.0.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
@@ -28,6 +30,8 @@ defmodule ExTumblr.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:httpoison, "~> 0.8.3"},
-     {:poison, "~> 2.1"}]
+     {:poison, "~> 2.1"},
+     {:earmark, "~> 0.1", only: :dev},
+     {:ex_doc, "~> 0.11", only: :dev}]
   end
 end
