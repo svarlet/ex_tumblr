@@ -1,6 +1,7 @@
 # ExTumblr
+[![Build Status](https://travis-ci.org/svarlet/ex_tumblr.svg?branch=master)](https://travis-ci.org/svarlet/ex_tumblr)
 
-**TODO: Add description**
+This library is a client for the Tumblr API v2 for the Elixir language.
 
 ## Installation
 
@@ -18,3 +19,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:ex_tumblr]]
         end
 
+## Requirements
+
+To be valid, many requests must specify an API key. Therefore it must be set as a `TUMBLR_API_KEY` environment variable.
