@@ -28,6 +28,7 @@ defmodule ExTumblr.Blog do
     likes: 0,
     is_blocked_from_primary: false
 
+  @api_key Application.get_env :ex_tumblr, :api_key
 
   @doc """
   Requests general information about the specified blog such as the title,
@@ -40,25 +41,24 @@ defmodule ExTumblr.Blog do
 
   """
   def info(blog_identifier) do
-    with({:ok, api_key} <- get_api_key,
-         {:ok, http_response} <- ExTumblr.get("/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"),
-         {:ok, body} <- get_response_body(http_response),
-         {:ok, blog_info} <- get_blog_info(body),
-         do: from_map(blog_info))
+    "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{@api_key}"
+    |> ExTumblr.get!
+    |> extract_blog_info
   end
 
-  defp get_api_key do
-    case Application.get_env(:ex_tumblr, :api_key, "not defined") do
-      "not defined" -> {:error, "Tumblr API key is not defined in the Application config."}
-      value -> {:ok, value}
+  defp property(map, property) do
+    case Map.fetch map, property do
+      {:ok, value} -> {:ok, value}
+      :error -> {:error, "The #{property} key does not exist."}
     end
   end
 
-  defp get_response_body(%HTTPoison.Response{body: body}), do: {:ok, body}
-  defp get_response_body(_), do: {:error, "Response does not contain a body field."}
-
-  defp get_blog_info(%{"response" => %{"blog" => blog_info}}), do: {:ok, blog_info}
-  defp get_blog_info(_), do: {:error, "Response body does not contain the expected `response` field."}
+  defp extract_blog_info(http_response) do
+    with({:ok, body} <- property(http_response, :body),
+      {:ok, response} <- property(body, "response"),
+      {:ok, blog_info} <- property(response, "blog"),
+      do: from_map(blog_info))
+  end
 
   defp from_map(blog_info) do
     read = fn field, default -> Map.get(blog_info, field, default) end
