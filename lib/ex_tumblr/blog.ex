@@ -35,7 +35,8 @@ defmodule ExTumblr.Blog do
 
   ## Examples
 
-      ExTumblr.Blog.info "gunkatana", "api-key"
+      iex> ExTumblr.Blog.info "gunkatana", "api-key"
+      "FIXME: http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts/"
   """
   def info(blog_identifier, api_key) do
     "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"
