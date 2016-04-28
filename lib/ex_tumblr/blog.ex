@@ -2,6 +2,9 @@ defmodule ExTumblr.Blog do
   alias ExTumblr.Blog
 
   import ExTumblr.Utils, only: [property: 2]
+
+  @tumblr_connector Application.get_env(:ex_tumblr, :ex_tumblr_connector)
+
   @typedoc """
   Represents the properties of a call to the Blog info endpoint.
 
@@ -40,7 +43,7 @@ defmodule ExTumblr.Blog do
   """
   def info(blog_identifier, api_key) do
     "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"
-    |> ExTumblr.get!
+    |> @tumblr_connector.get!
     |> extract_blog_info
   end
 

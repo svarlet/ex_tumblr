@@ -30,3 +30,5 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :ex_tumblr, api_key: System.get_env("TUMBLR_API_KEY")
+
+import_config "#{Mix.env}.exs"
