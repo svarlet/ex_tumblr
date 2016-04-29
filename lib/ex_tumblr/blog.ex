@@ -38,7 +38,8 @@ defmodule ExTumblr.Blog do
 
   ## Examples
 
-      iex> ExTumblr.Blog.info "gunkatana", "api-key"
+      iex> {:ok, info} = ExTumblr.Blog.info "gunkatana", "api-key"
+      iex> info
       %ExTumblr.Blog{
         title: "Gunkatana",
         name: "gunkatana",
@@ -51,19 +52,22 @@ defmodule ExTumblr.Blog do
         is_blocked_from_primary: false
       }
   """
+  @spec info(String.t, String.t) :: {:ok, t} | {:error, String.t}
   def info(blog_identifier, api_key) do
     "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"
     |> @tumblr_connector.get!
     |> extract_blog_info
   end
 
+  @spec extract_blog_info(map) :: {:ok, t} | {:error, String.t}
   defp extract_blog_info(http_response) do
     with({:ok, body} <- property(http_response, :body),
       {:ok, response} <- property(body, "response"),
       {:ok, blog_info} <- property(response, "blog"),
-      do: from_map(blog_info))
+      do: {:ok, from_map(blog_info)})
   end
 
+  @spec from_map(map) :: t
   defp from_map(blog_info) do
     read = fn field, default -> Map.get(blog_info, field, default) end
     %Blog{
