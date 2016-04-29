@@ -39,7 +39,17 @@ defmodule ExTumblr.Blog do
   ## Examples
 
       iex> ExTumblr.Blog.info "gunkatana", "api-key"
-      "FIXME: http://blog.plataformatec.com.br/2015/10/mocks-and-explicit-contracts/"
+      %ExTumblr.Blog{
+        title: "Gunkatana",
+        name: "gunkatana",
+        posts: "13",
+        updated: "1455328457",
+        description: "a cool description",
+        ask: false,
+        ask_anon: false,
+        likes: 0,
+        is_blocked_from_primary: false
+      }
   """
   def info(blog_identifier, api_key) do
     "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"
@@ -67,5 +77,21 @@ defmodule ExTumblr.Blog do
       likes: read.("likes", 0),
       is_blocked_from_primary: read.("is_blocked_from_primary", false)
     }
+  end
+
+  defimpl Inspect do
+    def inspect(dict, opts) do
+      "%ExTumblr.Blog{
+        title: #{dict.title},
+        name: #{dict.name},
+        posts: #{dict.posts},
+        updated: #{dict.updated},
+        description: #{dict.description},
+        ask: #{dict.ask},
+        ask_anon: #{dict.ask_anon},
+        likes: #{dict.likes},
+        is_blocked_from_primary: #{dict.is_blocked_from_primary}
+      }"
+    end
   end
 end
