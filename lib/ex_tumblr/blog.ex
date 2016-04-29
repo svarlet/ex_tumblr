@@ -42,8 +42,8 @@ defmodule ExTumblr.Blog do
       %ExTumblr.Blog{
         title: "Gunkatana",
         name: "gunkatana",
-        posts: "13",
-        updated: "1455328457",
+        posts: 13,
+        updated: 1455328457,
         description: "a cool description",
         ask: false,
         ask_anon: false,
@@ -81,7 +81,8 @@ defmodule ExTumblr.Blog do
 
   defimpl Inspect do
     def inspect(dict, opts) do
-      "%ExTumblr.Blog{
+      """
+      %ExTumblr.Blog{
         title: #{dict.title},
         name: #{dict.name},
         posts: #{dict.posts},
@@ -91,7 +92,8 @@ defmodule ExTumblr.Blog do
         ask_anon: #{dict.ask_anon},
         likes: #{dict.likes},
         is_blocked_from_primary: #{dict.is_blocked_from_primary}
-      }"
+      }
+      """
     end
   end
 end
