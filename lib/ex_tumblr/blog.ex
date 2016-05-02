@@ -3,7 +3,9 @@ defmodule ExTumblr.Blog do
 
   import ExTumblr.Utils, only: [property: 2]
 
-  @tumblr_connector Application.get_env(:ex_tumblr, :ex_tumblr_connector)
+  @http_client Application.get_env(:ex_tumblr, :http_client)
+
+  @hostname Application.get_env(:ex_tumblr, :hostname)
 
   @typedoc """
   Represents the properties of a call to the Blog info endpoint.
@@ -55,8 +57,23 @@ defmodule ExTumblr.Blog do
   @spec info(String.t, String.t) :: {:ok, t} | {:error, String.t}
   def info(blog_identifier, api_key) do
     "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"
-    |> @tumblr_connector.get!
+    |> @http_client.get!
     |> extract_blog_info
+  end
+
+  def build_request(nil, _), do: {:error, "Nil is not a valid blog identifier."}
+  def build_request(_, nil), do: {:error, "Nil is not a valid api key."}
+  def build_request(blog_identifier, api_key) do
+    request = %URI{
+      host: @hostname,
+      path: path_for(blog_identifier),
+      query: URI.encode_query(%{api_key: api_key})
+    }
+    |> URI.to_string
+  end
+
+  def do_request do
+    
   end
 
   @spec extract_blog_info(map) :: {:ok, t} | {:error, String.t}
@@ -84,7 +101,7 @@ defmodule ExTumblr.Blog do
   end
 
   defimpl Inspect do
-    def inspect(dict, opts) do
+    def inspect(dict, _opts) do
       """
       %ExTumblr.Blog{
         title: #{dict.title},
