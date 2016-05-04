@@ -67,11 +67,10 @@ defmodule ExTumblr.Blog do
     if (Regex.match?(~r/^\s*$/, blog_identifier)) do
       {:error, "A blog identifier cannot be blank."}
     else
-      request = %URI{
-        host: @hostname,
-        path: path_for(blog_identifier),
-        query: URI.encode_query(%{api_key: api_key})
-      }
+      @hostname
+      |> URI.parse
+      |> Map.put(:path, path_for(blog_identifier))
+      |> Map.put(:query, URI.encode_query(%{api_key: api_key}))
       |> URI.to_string
     end
   end
