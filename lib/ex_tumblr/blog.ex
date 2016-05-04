@@ -63,14 +63,17 @@ defmodule ExTumblr.Blog do
 
   def build_request(nil, _), do: {:error, "Nil is not a valid blog identifier."}
   def build_request(_, nil), do: {:error, "Nil is not a valid api key."}
-  def build_request("", _), do: {:error, "A blog identifier cannot be blank."}
   def build_request(blog_identifier, api_key) do
-    request = %URI{
-      host: @hostname,
-      path: path_for(blog_identifier),
-      query: URI.encode_query(%{api_key: api_key})
-    }
-    |> URI.to_string
+    if (Regex.match?(~r/^\s*$/, blog_identifier)) do
+      {:error, "A blog identifier cannot be blank."}
+    else
+      request = %URI{
+        host: @hostname,
+        path: path_for(blog_identifier),
+        query: URI.encode_query(%{api_key: api_key})
+      }
+      |> URI.to_string
+    end
   end
 
   defp path_for(blog_identifier) do
