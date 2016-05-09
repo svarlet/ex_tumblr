@@ -56,23 +56,40 @@ defmodule ExTumblr.Blog do
   """
   @spec info(String.t, String.t) :: {:ok, t} | {:error, String.t}
   def info(blog_identifier, api_key) do
-    "/blog/#{blog_identifier}.tumblr.com/info?api_key=#{api_key}"
-    |> @http_client.get!
-    |> extract_blog_info
+    with(
+      {:ok, valid_blog_identifier} <- validate_blog_identifier(blog_identifier),
+      {:ok, valid_api_key} <- validate_api_key(api_key),
+    do:
+      build_request(valid_blog_identifier, valid_api_key)
+      #todo: |> run request
+      #todo: |> extract_blog_info
+    )
   end
 
-  def build_request(nil, _), do: {:error, "Nil is not a valid blog identifier."}
-  def build_request(_, nil), do: {:error, "Nil is not a valid api key."}
-  def build_request(blog_identifier, api_key) do
-    if (Regex.match?(~r/^\s*$/, blog_identifier)) do
-      {:error, "A blog identifier cannot be blank."}
-    else
-      @hostname
-      |> URI.parse
-      |> Map.put(:path, path_for(blog_identifier))
-      |> Map.put(:query, URI.encode_query(%{api_key: api_key}))
-      |> URI.to_string
+  def blank?(string), do: Regex.match? ~r/^\s*$/, string
+
+  defp validate_blog_identifier(blog_identifier) do
+    cond do
+      is_nil blog_identifier -> {:error, "Nil is not a valid blog identifier."}
+      blank? blog_identifier -> {:error, "A blog identifier cannot be blank."}
+      true -> {:ok, blog_identifier}
     end
+  end
+
+  defp validate_api_key(api_key) do
+    cond do
+      is_nil api_key -> {:error, "Nil is not a valid api key."}
+      blank? api_key -> {:error, "An api key cannot be blank."}
+      true -> {:ok, api_key}
+    end
+  end
+
+  defp build_request(blog_identifier, api_key) do
+    @hostname
+    |> URI.parse
+    |> Map.put(:path, path_for(blog_identifier))
+    |> Map.put(:query, URI.encode_query(%{api_key: api_key}))
+    |> URI.to_string
   end
 
   defp path_for(blog_identifier) do
