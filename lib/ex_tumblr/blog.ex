@@ -112,6 +112,10 @@ defmodule ExTumblr.Blog do
     )
   end
 
+  defp parse_response(http_error) do
+    http_error
+  end
+
   @spec from_map(map) :: t
   defp from_map(blog_info) do
     read = fn field, default -> Map.get(blog_info, field, default) end
