@@ -3,8 +3,6 @@ defmodule ExTumblr.Blog do
 
   import ExTumblr.Utils, only: [property: 2]
 
-  @http_client Application.get_env(:ex_tumblr, :http_client)
-
   @hostname Application.get_env(:ex_tumblr, :hostname)
 
   @typedoc """
@@ -40,7 +38,8 @@ defmodule ExTumblr.Blog do
 
   ## Examples
 
-      iex> {:ok, info} = ExTumblr.Blog.info "gunkatana", "api-key"
+      iex> api_key = System.get_env "TUMBLR_API_KEY"
+      iex> {:ok, info} = ExTumblr.Blog.info "gunkatana.tumblr.com", api_key
       iex> info
       %ExTumblr.Blog{
         title: "Gunkatana",
@@ -61,8 +60,8 @@ defmodule ExTumblr.Blog do
       {:ok, valid_api_key} <- validate_api_key(api_key),
     do:
       build_request(valid_blog_identifier, valid_api_key)
-      #todo: |> run request
-      #todo: |> extract_blog_info
+      |> send_request
+      |> parse_response
     )
   end
 
@@ -93,19 +92,24 @@ defmodule ExTumblr.Blog do
   end
 
   defp path_for(blog_identifier) do
-    "/blog/#{blog_identifier}/info"
+    "/v2/blog/#{blog_identifier}/info"
   end
 
-  def do_request do
-    
+  @spec send_request(String.t) :: {:ok, HTTPoison.Response.t} | {:error, HTTPoison.Error.t}
+  defp send_request(request) do
+    request
+    |> HTTPoison.get
   end
 
-  @spec extract_blog_info(map) :: {:ok, t} | {:error, String.t}
-  defp extract_blog_info(http_response) do
-    with({:ok, body} <- property(http_response, :body),
+  @spec parse_response({:ok, map}) :: {:ok, t} | {:error, String.t}
+  defp parse_response({:ok, http_response}) do
+    with(
+      {:ok, body} <- Poison.decode(http_response.body),
       {:ok, response} <- property(body, "response"),
       {:ok, blog_info} <- property(response, "blog"),
-      do: {:ok, from_map(blog_info)})
+    do:
+      {:ok, from_map(blog_info)}
+    )
   end
 
   @spec from_map(map) :: t
