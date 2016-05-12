@@ -2,8 +2,6 @@ defmodule ExTumblr.BlogTest do
   use ExUnit.Case
   alias ExTumblr.Blog
 
-  doctest ExTumblr.Blog
-
   test "A string containing only whitespace characters is blank" do
     assert Blog.blank?("") == true
     assert Blog.blank?(" ") == true
