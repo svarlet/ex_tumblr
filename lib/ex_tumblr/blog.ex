@@ -59,7 +59,8 @@ defmodule ExTumblr.Blog do
       {:ok, valid_blog_identifier} <- validate_blog_identifier(blog_identifier),
       {:ok, valid_api_key} <- validate_api_key(api_key),
     do:
-      build_request(valid_blog_identifier, valid_api_key)
+      valid_blog_identifier
+      |> build_request(valid_api_key)
       |> send_request
       |> parse_response
     )
