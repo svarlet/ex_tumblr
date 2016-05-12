@@ -48,4 +48,10 @@ defmodule ExTumblr.BlogTest do
   test "A nil api key causes an error" do
     assert_failure_with "fake-blog-id", nil, "Nil is not a valid api key."
   end
+
+  test "send_request/2 sends the specified request through the specified http client" do
+    http_get_client = fn url -> send self(), {:request_sent, url} end
+    Blog.send_request "dummy url", http_get_client
+    assert_received {:request_sent, "dummy url"}
+  end
 end

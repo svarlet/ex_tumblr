@@ -95,10 +95,10 @@ defmodule ExTumblr.Blog do
     "/v2/blog/#{blog_identifier}/info"
   end
 
-  @spec send_request(String.t) :: {:ok, HTTPoison.Response.t} | {:error, HTTPoison.Error.t}
-  defp send_request(request) do
+  @spec send_request(String.t, fun()) :: {:ok, HTTPoison.Response.t} | {:error, HTTPoison.Error.t}
+  def send_request(request, http_get_client \\ HTTPoison.get) do
     request
-    |> HTTPoison.get
+    |> http_get_client.()
   end
 
   @spec parse_response({:ok, map}) :: {:ok, t} | {:error, String.t}
