@@ -34,6 +34,7 @@ defmodule ExTumblr.Mixfile do
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev},
      {:dialyxir, "~> 0.3", only: [:dev]},
+     {:mix_test_watch, "~> 0.2", only: :dev},
      {:credo, "~> 0.3", only: [:dev, :test]}
     ]
   end
