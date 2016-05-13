@@ -31,4 +31,5 @@ use Mix.Config
 config :ex_tumblr, hostname: "https://api.tumblr.com"
 config :ex_tumblr, api_key: System.get_env("TUMBLR_API_KEY")
 
+import_config "errors.exs"
 import_config "#{Mix.env}.exs"
