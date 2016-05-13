@@ -1,7 +1,7 @@
 defmodule ExTumblr.Blog do
   alias ExTumblr.Blog
 
-  import ExTumblr.Utils, only: [property: 2]
+  import ExTumblr.Utils, only: [property: 2, blank?: 1]
 
   @hostname Application.get_env(:ex_tumblr, :hostname)
 
@@ -65,8 +65,6 @@ defmodule ExTumblr.Blog do
       |> parse_response
     )
   end
-
-  def blank?(string), do: Regex.match? ~r/^\s*$/, string
 
   defp validate_blog_identifier(blog_identifier) do
     cond do
