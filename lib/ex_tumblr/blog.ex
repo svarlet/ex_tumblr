@@ -131,6 +131,14 @@ defmodule ExTumblr.Blog do
     }
   end
 
+  def avatar(blog_identifier) do
+    with(
+      {:ok, valid_blog_identifier} <- validate_blog_identifier(blog_identifier),
+    do:
+      {:ok, true}
+    )
+  end
+
   defimpl Inspect do
     def inspect(dict, _opts) do
       """
