@@ -97,7 +97,7 @@ defmodule ExTumblr.Blog do
   end
 
   @spec send_request(String.t, fun()) :: {:ok, HTTPoison.Response.t} | {:error, HTTPoison.Error.t}
-  def send_request(request, http_get_client \\ HTTPoison.get) do
+  def send_request(request, http_get_client \\ &HTTPoison.get/1) do
     request
     |> http_get_client.()
   end
