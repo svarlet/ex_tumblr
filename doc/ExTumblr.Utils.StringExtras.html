@@ -149,16 +149,20 @@ if its length is strictly positive</p>
     <p>Checks if a string contains any non-whitespace character and
 if its length is strictly positive.</p>
 <h2>Examples</h2>
-<p>iex&gt; ExTumblr.Utils.StringExtras.blank? “”
-true</p>
-<p>iex&gt; ExTumblr.Utils.StringExtras.blank? “ “
-true</p>
-<p>iex&gt; ExTumblr.Utils.StringExtras.blank? “  a”
-false</p>
-<p>iex&gt; ExTumblr.Utils.StringExtras.blank? “ \t \r\n”
-true</p>
-<p>iex&gt; ExTumblr.Utils.StringExtras.blank? “a\t”
-false</p>
+<pre><code class="iex elixir">iex&gt; ExTumblr.Utils.StringExtras.blank? &quot;&quot;
+true
+
+iex&gt; ExTumblr.Utils.StringExtras.blank? &quot; &quot;
+true
+
+iex&gt; ExTumblr.Utils.StringExtras.blank? &quot;  a&quot;
+false
+
+iex&gt; ExTumblr.Utils.StringExtras.blank? &quot; \t \r\n&quot;
+true
+
+iex&gt; ExTumblr.Utils.StringExtras.blank? &quot;a\t&quot;
+false</code></pre>
 
   </section>
 </div>
