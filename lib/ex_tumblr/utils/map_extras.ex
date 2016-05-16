@@ -1,6 +1,6 @@
 defmodule ExTumblr.Utils.MapExtras do
   @moduledoc """
-  Functions to manipulate maps, strings, ...
+  This module provides extra functions to manipulate maps.
   """
 
   @doc """
