@@ -1,4 +1,8 @@
 defmodule ExTumblr.Utils.StringExtras do
+  @moduledoc """
+  This module provides extra functions to manipulate strings.
+  """
+
   @doc ~S"""
   Checks if a string contains any non-whitespace character and
   if its length is strictly positive.
