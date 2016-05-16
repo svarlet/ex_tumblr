@@ -1,7 +1,6 @@
 defmodule ExTumblr.Blog do
   alias ExTumblr.{Blog, Validator}
 
-  import ExTumblr.Utils.StringExtras, only: [blank?: 1]
   import ExTumblr.Utils.MapExtras, only: [property: 2]
   import ExTumblr.Utils.URIExtras, only: [build_path: 1]
 
