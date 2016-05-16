@@ -1,7 +1,9 @@
 defmodule ExTumblr.Blog do
   alias ExTumblr.{Blog, Validator}
 
-  import ExTumblr.Utils, only: [property: 2, blank?: 1]
+  import ExTumblr.Utils.StringExtras, only: [blank?: 1]
+  import ExTumblr.Utils.MapExtras, only: [property: 2]
+  import ExTumblr.Utils.URIExtras, only: [build_path: 1]
 
   @hostname Application.get_env(:ex_tumblr, :hostname)
 
@@ -119,15 +121,6 @@ defmodule ExTumblr.Blog do
       |> URI.parse
       |> Map.put(:path, build_path(~w(v2 #{blog_identifier} avatar #{size})))
     )
-  end
-
-  def build_path(path_elements) when path_elements in [[], nil] do
-    ""
-  end
-
-  def build_path(path_elements) do
-    path_elements
-    |> Enum.reduce("", fn elem, acc -> "#{acc}/#{elem}" end)
   end
 
   defimpl Inspect do

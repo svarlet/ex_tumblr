@@ -1,5 +1,5 @@
 defmodule ExTumblr.Validator do
-  import ExTumblr.Utils, only: [blank?: 1]
+  import ExTumblr.Utils.StringExtras, only: [blank?: 1]
 
   @nil_blog_id Application.get_env :ex_tumblr, :nil_blog_identifier
   @blank_blog_id Application.get_env :ex_tumblr, :blank_blog_identifier
