@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.Utils – ExTumblr v0.0.1</title>
+    <title>ExTumblr.Utils.URIExtras – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.Utils
+        ExTumblr.Utils.URIExtras
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils/uri_extras.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,7 +72,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Functions to manipulate maps, strings, …</p>
+          <p>This module provides extra functions to manipulate URIs.</p>
 
         </section>
       
@@ -94,20 +94,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#blank?/1">blank?(string)</a>
+    <a href="#build_path/1">build_path(path_elements)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Checks if a string contains any non-whitespace character and
-if its length is strictly positive</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#property/2">property(map, key)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns the value associated to a <code class="inline">key</code> in a map</p>
+    <div class="summary-synopsis"><p>Builds the path of a URL from a list of path elements</p>
 </div>
   
 </div>
@@ -132,14 +122,14 @@ if its length is strictly positive</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="blank?/1">
+          <div class="detail" id="build_path/1">
   <div class="detail-header">
-    <a href="#blank?/1" class="detail-link" title="Link to this function">
+    <a href="#build_path/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">blank?(string)</span>
+    <span class="signature">build_path(path_elements)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils.ex#L59" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils/uri_extras.ex#L22" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -149,70 +139,21 @@ if its length is strictly positive</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">blank?(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: boolean</code></pre>
+          <pre><code class="elixir">build_path([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>]) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Checks if a string contains any non-whitespace character and
-if its length is strictly positive.</p>
+    <p>Builds the path of a URL from a list of path elements.</p>
+<p>This function prefixes each path element with a slash character and concatenates
+them. If the list of path elements is nil or empty, an empty string is returned.</p>
 <h2>Examples</h2>
-<pre><code class="iex elixir">iex&gt; ExTumblr.Utils.blank? &quot;&quot;
-true
+<pre><code class="iex elixir">iex&gt; ExTumblr.Utils.URIExtras.build_path(~w(this is a path))
+&quot;/this/is/a/path&quot;
 
-iex&gt; ExTumblr.Utils.blank? &quot; &quot;
-true
-
-iex&gt; ExTumblr.Utils.blank? &quot;  a&quot;
-false
-
-iex&gt; ExTumblr.Utils.blank? &quot; \t \r\n&quot;
-true
-
-iex&gt; ExTumblr.Utils.blank? &quot;a\t&quot;
-false</code></pre>
-
-  </section>
-</div>
-<div class="detail" id="property/2">
-  <div class="detail-header">
-    <a href="#property/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">property(map, key)</span>
-      
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils.ex#L25" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">property(map, atom) ::
-  {:ok, any} |
-  {:error, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Returns the value associated to a <code class="inline">key</code> in a map.</p>
-<h2>Examples</h2>
-<pre><code class="iex elixir">iex&gt; ExTumblr.Utils.property(%{a: 1, b: 2}, :b)
-{:ok, 2}
-
-iex&gt; ExTumblr.Utils.property(%{id: 32, user: %{firstname: &quot;Sébastien&quot;, lastname: &quot;Varlet&quot;}}, :user)
-{:ok, %{firstname: &quot;Sébastien&quot;, lastname: &quot;Varlet&quot;}}
-
-iex&gt; ExTumblr.Utils.property(nil, :key)
-{:error, &quot;The map is nil.&quot;}
-
-iex&gt; ExTumblr.Utils.property(%{}, :firstname)
-{:error, &quot;The firstname key does not exist.&quot;}</code></pre>
+iex&gt; ExTumblr.Utils.URIExtras.build_path([&quot;home&quot;])
+&quot;/home&quot;</code></pre>
 
   </section>
 </div>
