@@ -9,20 +9,20 @@ defmodule ExTumblr.Utils.StringExtras do
 
   ## Examples
 
-  iex> ExTumblr.Utils.StringExtras.blank? ""
-  true
+      iex> ExTumblr.Utils.StringExtras.blank? ""
+      true
 
-  iex> ExTumblr.Utils.StringExtras.blank? " "
-  true
+      iex> ExTumblr.Utils.StringExtras.blank? " "
+      true
 
-  iex> ExTumblr.Utils.StringExtras.blank? "  a"
-  false
+      iex> ExTumblr.Utils.StringExtras.blank? "  a"
+      false
 
-  iex> ExTumblr.Utils.StringExtras.blank? " \t \r\n"
-  true
+      iex> ExTumblr.Utils.StringExtras.blank? " \t \r\n"
+      true
 
-  iex> ExTumblr.Utils.StringExtras.blank? "a\t"
-  false
+      iex> ExTumblr.Utils.StringExtras.blank? "a\t"
+      false
 
   """
   @spec blank?(String.t) :: boolean
