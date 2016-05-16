@@ -69,13 +69,9 @@ defmodule ExTumblr.Blog do
   defp build_request(blog_identifier, api_key) do
     @hostname
     |> URI.parse
-    |> Map.put(:path, path_for(blog_identifier))
+    |> Map.put(:path, build_path(~w(v2 blog #{blog_identifier} info)))
     |> Map.put(:query, URI.encode_query(%{api_key: api_key}))
     |> URI.to_string
-  end
-
-  defp path_for(blog_identifier) do
-    "/v2/blog/#{blog_identifier}/info"
   end
 
   @spec send_request(String.t, fun()) :: {:ok, HTTPoison.Response.t} | {:error, HTTPoison.Error.t}
@@ -121,17 +117,17 @@ defmodule ExTumblr.Blog do
     do:
       @hostname
       |> URI.parse
-      |> Map.put(:path, build_path([blog_identifier, "avatar", size]))
+      |> Map.put(:path, build_path(~w(v2 #{blog_identifier} avatar #{size})))
     )
   end
 
+  def build_path(path_elements) when path_elements in [[], nil] do
+    ""
+  end
+
   def build_path(path_elements) do
-    case path_elements do
-      nil -> ""
-      [] -> ""
-      _ -> path_elements
-           |> Enum.reduce("/", &Kernel.<>(&2, &1))
-    end
+    path_elements
+    |> Enum.reduce("", fn elem, acc -> "#{acc}/#{elem}" end)
   end
 
   defimpl Inspect do

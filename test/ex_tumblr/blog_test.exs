@@ -26,6 +26,6 @@ defmodule ExTumblr.BlogTest do
   end
 
   test "Given a list with 2 path elements, build_path/1 prefixes them with a slash and concatenates them" do
-    flunk "todo!"
+    assert "/a/word" == Blog.build_path(~w(a word))
   end
 end
