@@ -115,12 +115,23 @@ defmodule ExTumblr.Blog do
     }
   end
 
-  def avatar(blog_identifier) do
+  def avatar(blog_identifier, size) when size in [16, 24, 30, 40, 48, 64, 96, 128, 512] do
     with(
       {:ok, valid_blog_identifier} <- Validator.validate_blog_identifier(blog_identifier),
     do:
-      {:ok, true}
+      @hostname
+      |> URI.parse
+      |> Map.put(:path, build_path([blog_identifier, "avatar", size]))
     )
+  end
+
+  def build_path(path_elements) do
+    case path_elements do
+      nil -> ""
+      [] -> ""
+      _ -> path_elements
+           |> Enum.reduce("/", &Kernel.<>(&2, &1))
+    end
   end
 
   defimpl Inspect do
