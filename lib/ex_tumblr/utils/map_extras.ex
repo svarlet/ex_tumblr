@@ -8,17 +8,17 @@ defmodule ExTumblr.Utils.MapExtras do
 
   ## Examples
 
-  iex> ExTumblr.Utils.MapExtras.property(%{a: 1, b: 2}, :b)
-  {:ok, 2}
+      iex> ExTumblr.Utils.MapExtras.property(%{a: 1, b: 2}, :b)
+      {:ok, 2}
 
-  iex> ExTumblr.Utils.MapExtras.property(%{id: 32, user: %{firstname: "Sébastien", lastname: "Varlet"}}, :user)
-  {:ok, %{firstname: "Sébastien", lastname: "Varlet"}}
+      iex> ExTumblr.Utils.MapExtras.property(%{id: 32, user: %{firstname: "Sébastien", lastname: "Varlet"}}, :user)
+      {:ok, %{firstname: "Sébastien", lastname: "Varlet"}}
 
-  iex> ExTumblr.Utils.MapExtras.property(nil, :key)
-  {:error, "The map is nil."}
+      iex> ExTumblr.Utils.MapExtras.property(nil, :key)
+      {:error, "The map is nil."}
 
-  iex> ExTumblr.Utils.MapExtras.property(%{}, :firstname)
-  {:error, "The firstname key does not exist."}
+      iex> ExTumblr.Utils.MapExtras.property(%{}, :firstname)
+      {:error, "The firstname key does not exist."}
 
   """
   @spec property(map, atom) :: {:ok, any} | {:error, String.t}
