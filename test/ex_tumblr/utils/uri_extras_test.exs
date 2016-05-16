@@ -1,6 +1,8 @@
 defmodule ExTumblr.Utils.URIExtrasTest do
   use ExUnit.Case, async: true
 
+  doctest ExTumblr.Utils.URIExtras
+
   import ExTumblr.Utils.URIExtras, only: [build_path: 1]
 
   test "Given a nil list of element path, build_path/1 returns an empty string" do

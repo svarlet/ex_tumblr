@@ -8,6 +8,15 @@ defmodule ExTumblr.Utils.URIExtras do
 
   This function prefixes each path element with a slash character and concatenates
   them. If the list of path elements is nil or empty, an empty string is returned.
+
+  ## Examples
+
+      iex> ExTumblr.Utils.URIExtras.build_path(~w(this is a path))
+      "/this/is/a/path"
+
+      iex> ExTumblr.Utils.URIExtras.build_path(["home"])
+      "/home"
+
   """
   @spec build_path([String.t]) :: String.t
   def build_path(path_elements) when path_elements in [[], nil] do
