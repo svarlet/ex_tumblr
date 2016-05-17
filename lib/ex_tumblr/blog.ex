@@ -124,8 +124,14 @@ defmodule ExTumblr.Blog do
     )
   end
 
-  def parse_avatar_response({:ok, http_response) do
-    #todo:
+  def parse_avatar_response({:ok, http_response}) do
+    with(
+      {:ok, body} <- Poison.decode(http_response.body),
+      {:ok, response} <- property(body, "response"),
+      {:ok, avatar_url} <- property(response, "avatar_url"),
+    do:
+      {:ok, avatar_url}
+    )
   end
 
   defimpl Inspect do
