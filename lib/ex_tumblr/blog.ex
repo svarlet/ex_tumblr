@@ -57,11 +57,11 @@ defmodule ExTumblr.Blog do
   @spec info(String.t, String.t) :: {:ok, t} | {:error, String.t}
   def info(blog_identifier, api_key) do
     with(
-      {:ok, valid_blog_identifier} <- Validator.validate_blog_identifier(blog_identifier),
-      {:ok, valid_api_key} <- Validator.validate_api_key(api_key),
+      {:ok, _} <- Validator.validate_blog_identifier(blog_identifier),
+      {:ok, _} <- Validator.validate_api_key(api_key),
     do:
-      valid_blog_identifier
-      |> build_request(valid_api_key)
+      blog_identifier
+      |> build_request(api_key)
       |> send_request
       |> parse_response
     )
@@ -114,7 +114,7 @@ defmodule ExTumblr.Blog do
 
   def avatar(blog_identifier, size) when size in [16, 24, 30, 40, 48, 64, 96, 128, 512] do
     with(
-      {:ok, valid_blog_identifier} <- Validator.validate_blog_identifier(blog_identifier),
+      {:ok, _} <- Validator.validate_blog_identifier(blog_identifier),
     do:
       @hostname
       |> URI.parse
