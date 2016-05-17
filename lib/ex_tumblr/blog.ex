@@ -119,7 +119,13 @@ defmodule ExTumblr.Blog do
       @hostname
       |> URI.parse
       |> Map.put(:path, build_path(~w(v2 #{blog_identifier} avatar #{size})))
+      |> send_request
+      |> parse_avatar_response
     )
+  end
+
+  def parse_avatar_response({:ok, http_response) do
+    #todo:
   end
 
   defimpl Inspect do
