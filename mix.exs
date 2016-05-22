@@ -31,6 +31,7 @@ defmodule ExTumblr.Mixfile do
   defp deps do
     [{:httpoison, "~> 0.8.3"},
      {:poison, "~> 2.1"},
+     {:oauther, "~> 1.0.2"},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev},
      {:dialyxir, "~> 0.3", only: [:dev]},

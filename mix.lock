@@ -11,5 +11,6 @@
   "metrics": {:hex, :metrics, "1.0.1"},
   "mimerl": {:hex, :mimerl, "1.0.2"},
   "mix_test_watch": {:hex, :mix_test_watch, "0.2.6"},
+  "oauther": {:hex, :oauther, "1.0.2"},
   "poison": {:hex, :poison, "2.1.0"},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0"}}
