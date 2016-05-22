@@ -5,8 +5,8 @@ defmodule ExTumblr.Blog do
     {:get, "#{@hostname}/v2/blog/#{blog_identifier}/info", params, :api_key_auth, credentials}
   end
 
-  def avatar(blog_identifier, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/avatar", params, :no_auth, nil}
+  def avatar(blog_identifier, size) when size in [16, 24, 30, 40, 48, 64, 96, 128, 512] do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/avatar/#{size}", nil, :no_auth, nil}
   end
 
   def followers(blog_identifier, credentials, params) do

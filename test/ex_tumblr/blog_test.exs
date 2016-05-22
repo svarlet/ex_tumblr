@@ -11,8 +11,8 @@ defmodule ExTumblr.BlogTest do
     assert {:get, "https://api.tumblr.com/v2/blog/gunkatana.tumblr.com/info", ^params, :api_key_auth, ^credentials} = Blog.info("gunkatana.tumblr.com", credentials, params)
   end
 
-  test "avatar/2 creates a valid request", %{credentials: _credentials, params: params} do
-    assert {:get, "https://api.tumblr.com/v2/blog/gunkatana.tumblr.com/avatar", ^params, :no_auth, nil} = Blog.avatar("gunkatana.tumblr.com", params)
+  test "avatar/2 creates a valid request" do
+    assert {:get, "https://api.tumblr.com/v2/blog/gunkatana.tumblr.com/avatar/48", nil, :no_auth, nil} = Blog.avatar("gunkatana.tumblr.com", 48)
   end
 
   test "followers/3 creates a valid request", %{credentials: credentials, params: params} do
