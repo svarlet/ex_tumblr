@@ -6,15 +6,11 @@ defmodule ExTumblr do
   alias ExTumblr.Blog
 
   def blog_info(blog_identifier, credentials, params) do
-    {method, url, api_params, auth, creds} = Blog.info(blog_identifier, credentials, params)
+    Blog.info(blog_identifier, credentials, params)
+    |> send_request
+  end
 
-    # si oauth ou post alors
-    # genere body
-    # genere headers
-    # sinon si get
-    # genere query
-    # fin
-
+  defp send_request({method, url, api_params, auth, creds}) do
     cond do
       :oauth == auth ->
         {headers, body} = sign_request(method, url, api_params, creds)
