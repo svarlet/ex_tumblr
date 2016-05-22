@@ -10,21 +10,22 @@ defmodule ExTumblr do
     |> send_request
   end
 
-  defp send_request({method, url, api_params, auth, creds}) do
-    cond do
-      :oauth == auth ->
-        {headers, body} = sign_request(method, url, api_params, creds)
-        HTTPoison.request method, url, {:form, body}, [headers]
-      :api_key_auth == auth ->
-        query =
-          api_params
-          |> Map.put("api_key", creds.consumer_key)
-          |> URI.encode_query
-        HTTPoison.request method, "#{url}?#{query}"
-      :no_auth ->
-        query = URI.encode_query(api_params)
-        HTTPoison.request method, "#{url}?#{query}"
-    end
+  defp send_request({method, url, api_params, :oauth, creds}) do
+    {headers, body} = sign_request(method, url, api_params, creds)
+    HTTPoison.request method, url, {:form, body}, [headers]
+  end
+
+  defp send_request({method, url, api_params, :api_key_auth, creds}) do
+    query =
+      api_params
+      |> Map.put("api_key", creds.consumer_key)
+      |> URI.encode_query
+    HTTPoison.request method, "#{url}?#{query}"
+  end
+
+  defp send_request({method, url, api_params, :no_auth, creds}) do
+    query = URI.encode_query(api_params)
+    HTTPoison.request method, "#{url}?#{query}"
   end
 
   defp sign_request(method, url, params, credentials) do
