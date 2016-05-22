@@ -23,7 +23,7 @@ defmodule ExTumblr do
     HTTPoison.request method, "#{url}?#{query}"
   end
 
-  defp send_request({method, url, api_params, :no_auth, creds}) do
+  defp send_request({method, url, api_params, :no_auth, _creds}) do
     query = URI.encode_query(api_params)
     HTTPoison.request method, "#{url}?#{query}"
   end
@@ -35,8 +35,7 @@ defmodule ExTumblr do
       token: credentials.token,
       token_secret: credentials.token_secret
     )
-    {headers, body} =
-      OAuther.sign(to_string(method), url, Keyword.new(params), oauth_creds)
-      |> OAuther.header
+    OAuther.sign(to_string(method), url, Keyword.new(params), oauth_creds)
+    |> OAuther.header
   end
 end
