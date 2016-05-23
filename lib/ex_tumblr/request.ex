@@ -1,8 +1,10 @@
 defmodule ExTumblr.Request do
   defstruct [:method, :url, :headers, :body]
 
-  @spec sign_request(atom, String.t, Credentials.t, Keyword.t) :: {tuple(String.t), Keyword.t}
-  defp sign_request_with_oauth(method, url, credentials, params) do
+  @type authorization_headers :: {String.t, String.t}
+
+  @spec sign_request_with_oauth(atom, String.t, Credentials.t, Keyword.t) :: {authorization_headers, Keyword.t}
+  def sign_request_with_oauth(method, url, credentials, params) do
     oauth_creds = OAuther.credentials(
       consumer_key: credentials.consumer_key,
       consumer_secret: credentials.consumer_secret,
