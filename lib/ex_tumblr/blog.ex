@@ -1,51 +1,51 @@
 defmodule ExTumblr.Blog do
   @hostname Application.get_env :ex_tumblr, :hostname
 
-  def info(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/info", params, :api_key_auth, credentials}
+  def create_info_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/info", :api_key_auth}
   end
 
-  def avatar(blog_identifier, size) when size in [16, 24, 30, 40, 48, 64, 96, 128, 512] do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/avatar/#{size}", nil, :no_auth, nil}
+  def create_avatar_request(blog_identifier, size) when size in [16, 24, 30, 40, 48, 64, 96, 128, 512] do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/avatar/#{size}", :no_auth}
   end
 
-  def followers(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/followers", params, :oauth, credentials}
+  def create_followers_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/followers", :oauth}
   end
 
-  def likes(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/likes", params, :api_key_auth, credentials}
+  def create_likes_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/likes", :api_key_auth}
   end
 
-  def posts(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts", params, :api_key_auth, credentials}
+  def create_posts_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts", :api_key_auth}
   end
 
-  def queued_posts(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts/queue", params, :oauth, credentials}
+  def create_queued_posts_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts/queue", :oauth}
   end
 
-  def drafts(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts/drafts", params, :oauth, credentials}
+  def create_drafts_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts/drafts", :oauth}
   end
 
-  def submission(blog_identifier, credentials, params) do
-    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts/submission", params, :oauth, credentials}
+  def create_submission_request(blog_identifier) do
+    {:get, "#{@hostname}/v2/blog/#{blog_identifier}/posts/submission", :oauth}
   end
 
-  def create(blog_identifier, credentials, params) do
-    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post", params, :oauth, credentials}
+  def create_create_request(blog_identifier) do
+    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post", :oauth}
   end
 
-  def edit(blog_identifier, credentials, params) do
-    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post/edit", params, :oauth, credentials}
+  def create_edit_request(blog_identifier) do
+    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post/edit", :oauth}
   end
 
-  def reblog(blog_identifier, credentials, params) do
-    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post/reblog", params, :oauth, credentials}
+  def create_reblog_request(blog_identifier) do
+    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post/reblog", :oauth}
   end
 
-  def delete(blog_identifier, credentials, params) do
-    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post/delete", params, :oauth, credentials}
+  def create_delete_request(blog_identifier) do
+    {:post, "#{@hostname}/v2/blog/#{blog_identifier}/post/delete", :oauth}
   end
 end
