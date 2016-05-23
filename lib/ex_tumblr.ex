@@ -3,7 +3,7 @@ defmodule ExTumblr do
     defstruct consumer_key: nil, consumer_secret: nil, token: nil, token_secret: nil
   end
 
-  alias ExTumblr.Blog
+  alias ExTumblr.{Blog, Request}
 
   def blog_info(blog_identifier, credentials, params) do
     Blog.info(blog_identifier, credentials, params)
@@ -20,8 +20,12 @@ defmodule ExTumblr do
     |> send_request
   end
 
+  #
+  # SENDING REQUESTS
+  #
+
   defp send_request({method, url, api_params, :oauth, creds}) do
-    {headers, body} = sign_request(method, url, api_params, creds)
+    {headers, body} = Request.sign_request_with_oauth(method, url, api_params, creds)
     HTTPoison.request method, url, {:form, body}, [headers]
   end
 
@@ -41,18 +45,4 @@ defmodule ExTumblr do
     HTTPoison.request method, "#{url}?#{query}"
   end
 
-  defp sign_request(method, url, params, credentials) do
-    oauth_creds = OAuther.credentials(
-      consumer_key: credentials.consumer_key,
-      consumer_secret: credentials.consumer_secret,
-      token: credentials.token,
-      token_secret: credentials.token_secret
-    )
-    params_as_keyword = case params do
-                          nil -> []
-                          _ -> Keyword.new(params)
-                        end
-    OAuther.sign(to_string(method), url, params_as_keyword, oauth_creds)
-    |> OAuther.header
-  end
 end
