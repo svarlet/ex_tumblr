@@ -44,5 +44,4 @@ defmodule ExTumblr do
               end
     HTTPoison.request method, "#{url}?#{query}"
   end
-
 end
