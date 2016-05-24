@@ -13,4 +13,5 @@
   "mix_test_watch": {:hex, :mix_test_watch, "0.2.6", "9fcc2b1b89d1594c4a8300959c19d50da2f0ff13642c8f681692a6e507f92cab", [:mix], [{:fs, "~> 0.9.1", [hex: :fs, optional: false]}]},
   "oauther": {:hex, :oauther, "1.0.2", "c2a8476649f3def353db4d38aa498d1313a21e2dd36958ac74f6ee80ef374620", [:mix], []},
   "poison": {:hex, :poison, "2.1.0", "f583218ced822675e484648fa26c933d621373f01c6c76bd00005d7bd4b82e27", [:mix], []},
+  "shouldi": {:hex, :shouldi, "0.3.0", "ae3fb3cec3328057377a0aa750aa1bb9f8b321ba054e1e2c7211512c383fb6ff", [:mix], []},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0", "edee20847c42e379bf91261db474ffbe373f8acb56e9079acb6038d4e0bf414f", [:rebar, :make], []}}
