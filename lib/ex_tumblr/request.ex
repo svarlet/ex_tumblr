@@ -9,12 +9,12 @@ defmodule ExTumblr.Request do
   @type headers :: {String.t, String.t}
   @type prepared_request :: {method, url, body, headers}
 
-  defp prepare_request_auth({method, url, :oauth}, credentials, params) do
+  def prepare_request_auth({method, url, :oauth}, credentials, params) do
     {headers, body} = Request.sign_request_with_oauth(method, url, params, credentials)
     {method, url, {:form, body}, [headers]}
   end
 
-  defp prepare_request_auth({method, url, :api_key_auth}, credentials, params) do
+  def prepare_request_auth({method, url, :api_key_auth}, credentials, params) do
     query =
       params
       |> if_nil(Map.new)
@@ -23,7 +23,7 @@ defmodule ExTumblr.Request do
     {method, "#{url}?#{query}", nil, nil}
   end
 
-  defp prepare_request_auth({method, url, :no_auth}, _credentials, params) do
+  def prepare_request_auth({method, url, :no_auth}, _credentials, params) do
     query =
       params
       |> if_nil("")
