@@ -40,7 +40,7 @@ defmodule ExTumblr.Request do
   end
 
   @spec sign_request_with_oauth(atom, String.t, Credentials.t, Keyword.t) :: {authorization_headers, Keyword.t}
-  def sign_request_with_oauth(method, url, credentials, params) do
+  defp sign_request_with_oauth(method, url, credentials, params) do
     oauth_creds = OAuther.credentials(
       consumer_key: credentials.consumer_key,
       consumer_secret: credentials.consumer_secret,
