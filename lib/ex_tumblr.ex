@@ -1,6 +1,8 @@
 defmodule ExTumblr do
   @moduledoc """
   Provides functions to query the various endpoints of the Tumblr API.
+
+  See https://www.tumblr.com/docs/en/api/v2
   """
   alias ExTumblr.{Blog, Request}
 
