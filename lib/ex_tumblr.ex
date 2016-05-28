@@ -27,6 +27,20 @@ defmodule ExTumblr do
     |> emit
   end
 
+  def blog_likes(blog_identifier, credentials, params) do
+    blog_identifier
+    |> Blog.create_likes_request
+    |> Request.prepare_request_auth(credentials, params)
+    |> emit
+  end
+
+  def blog_posts(blog_identifier, credentials, params) do
+    blog_identifier
+    |> Blog.create_posts_request
+    |> Request.prepare_request_auth(credentials, params)
+    |> emit
+  end
+
   defp emit({method, url, body, headers}) do
     adapter = Application.get_env :ex_tumblr, :http_client
     Kernel.apply(adapter, :request, [method, url, body, headers])
