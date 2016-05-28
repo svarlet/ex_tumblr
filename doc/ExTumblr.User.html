@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.Utils.URIExtras – ExTumblr v0.0.1</title>
+    <title>ExTumblr.User – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,20 +61,15 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.Utils.URIExtras
+        ExTumblr.User
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils/uri_extras.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/user.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
       </h1>
 
-      
-        <section id="moduledoc" class="docstring">
-          <p>This module provides extra functions to manipulate URIs.</p>
-
-        </section>
       
 
       
@@ -94,11 +89,26 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#build_path/1">build_path(path_elements)</a>
+    <a href="#dashboard/2">dashboard(credentials, params)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Builds the path of a URL from a list of path elements</p>
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#following/2">following(credentials, params)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#info/2">info(credentials, params)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#likes/2">likes(credentials, params)</a>
+  </div>
   
 </div>
 
@@ -122,39 +132,72 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="build_path/1">
+          <div class="detail" id="dashboard/2">
   <div class="detail-header">
-    <a href="#build_path/1" class="detail-link" title="Link to this function">
+    <a href="#dashboard/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">build_path(path_elements)</span>
+    <span class="signature">dashboard(credentials, params)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/utils/uri_extras.ex#L22" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/user.ex#L8" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">build_path([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>]) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
-        
-      </div>
-    </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="following/2">
+  <div class="detail-header">
+    <a href="#following/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">following(credentials, params)</span>
+      
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/user.ex#L16" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
   
   <section class="docstring">
-    <p>Builds the path of a URL from a list of path elements.</p>
-<p>This function prefixes each path element with a slash character and concatenates
-them. If the list of path elements is nil or empty, an empty string is returned.</p>
-<h2>Examples</h2>
-<pre><code class="iex elixir">iex&gt; ExTumblr.Utils.URIExtras.build_path(~w(this is a path))
-&quot;/this/is/a/path&quot;
-
-iex&gt; ExTumblr.Utils.URIExtras.build_path([&quot;home&quot;])
-&quot;/home&quot;</code></pre>
-
+    
+  </section>
+</div>
+<div class="detail" id="info/2">
+  <div class="detail-header">
+    <a href="#info/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">info(credentials, params)</span>
+      
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/user.ex#L4" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="likes/2">
+  <div class="detail-header">
+    <a href="#likes/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">likes(credentials, params)</span>
+      
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/user.ex#L12" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
   </section>
 </div>
 

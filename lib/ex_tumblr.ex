@@ -1,4 +1,7 @@
 defmodule ExTumblr do
+  @moduledoc """
+  Provides functions to query the various endpoints of the Tumblr API.
+  """
   alias ExTumblr.{Blog, Request}
 
   def blog_info(blog_identifier, credentials, params) do

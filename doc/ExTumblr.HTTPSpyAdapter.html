@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr – ExTumblr v0.0.1</title>
+    <title>ExTumblr.HTTPSpyAdapter – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,20 +61,15 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr
+        ExTumblr.HTTPSpyAdapter
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_client_adapter.ex#L13" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
       </h1>
 
-      
-        <section id="moduledoc" class="docstring">
-          <p>Provides functions to query the various endpoints of the Tumblr API.</p>
-
-        </section>
       
 
       
@@ -94,20 +89,11 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#blog_avatar/2">blog_avatar(blog_identifier, size \\ 64)</a>
+    <a href="#request/4">request(method, url, body, headers)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Callback implementation for <a href="ExTumblr.HTTPClientBehaviour.html#c:request/4"><code class="inline">ExTumblr.HTTPClientBehaviour.request/4</code></a></p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#blog_followers/3">blog_followers(blog_identifier, credentials, params)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#blog_info/3">blog_info(blog_identifier, credentials, params)</a>
-  </div>
   
 </div>
 
@@ -131,55 +117,22 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="blog_avatar/2">
+          <div class="detail" id="request/4">
   <div class="detail-header">
-    <a href="#blog_avatar/2" class="detail-link" title="Link to this function">
+    <a href="#request/4" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">blog_avatar(blog_identifier, size \\ 64)</span>
+    <span class="signature">request(method, url, body, headers)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr.ex#L14" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_client_adapter.ex#L16" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="blog_followers/3">
-  <div class="detail-header">
-    <a href="#blog_followers/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">blog_followers(blog_identifier, credentials, params)</span>
-      
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr.ex#L21" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="blog_info/3">
-  <div class="detail-header">
-    <a href="#blog_info/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">blog_info(blog_identifier, credentials, params)</span>
-      
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr.ex#L7" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-  <section class="docstring">
-    
+    <p>Callback implementation for <a href="ExTumblr.HTTPClientBehaviour.html#c:request/4"><code class="inline">ExTumblr.HTTPClientBehaviour.request/4</code></a>.</p>
+
   </section>
 </div>
 
