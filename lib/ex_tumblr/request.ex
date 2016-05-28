@@ -1,6 +1,4 @@
 defmodule ExTumblr.Request do
-  defstruct [:method, :url, :headers, :body]
-
   alias ExTumblr.Credentials
 
   @type authorization_headers :: {String.t, String.t}

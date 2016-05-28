@@ -1,5 +1,5 @@
 defmodule ExTumblr.User do
-  @hostname Application.get_env :ex_tumblr, :hostname
+  @hostname "https://api.tumblr.com"
 
   def info(credentials, params) do
     {:get, "#{@hostname}/v2/user/info", params, :oauth, credentials}
