@@ -31,5 +31,4 @@ defmodule ExTumblr do
     adapter = Application.get_env :ex_tumblr, :http_client
     Kernel.apply(adapter, :request, [method, url, body, headers])
   end
-
 end
