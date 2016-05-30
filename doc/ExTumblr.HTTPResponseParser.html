@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.HTTPClientBehaviour – ExTumblr v0.0.1</title>
+    <title>ExTumblr.HTTPResponseParser – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
-  <body data-type="modules">
+  <body data-type="protocols">
 
     <div class="main">
 <button class="sidebar-toggle">
@@ -63,12 +63,12 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.HTTPClientBehaviour
+        ExTumblr.HTTPResponseParser
         
-          <small>behaviour</small>
+          <small>protocol</small>
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_client_adapter.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_response_parser.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -85,19 +85,13 @@
             Summary
           </h1>
           
-
-          
-
-          
-
-          
-  <div class="summary-callbacks summary">
+  <div class="summary-types summary">
     <h2>
-      <a href="#callbacks">Callbacks</a>
+      <a href="#types">Types</a>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#c:request/4">request(method, url, body, headers)</a>
+    <a href="#t:t/0">t()</a>
   </div>
   
 </div>
@@ -105,31 +99,65 @@
   </div>
 
 
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#parse/1">parse(http_response)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Parses the http response to return the decoded results as a map</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
         </section>
       
 
       
-
-      
-
-      
-
-      
-        <section id="callbacks" class="details-list">
+        <section id="types" class="types details-list">
           <h1 class="section-heading">
-            <a class="hover-link" href="#callbacks">
+            <a class="hover-link" href="#types">
               <i class="icon-link"></i>
             </a>
-            Callbacks
+            Types
           </h1>
-          <div class="detail" id="c:request/4">
+          <div class="types-list">
+            <div id="t:t/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: term</code></pre>
+  
+</div>
+
+          </div>
+        </section>
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="parse/1">
   <div class="detail-header">
-    <a href="#c:request/4" class="detail-link" title="Link to this callback">
+    <a href="#parse/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">request(method, url, body, headers)</span>
+    <span class="signature">parse(http_response)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_client_adapter.ex#L2" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_response_parser.ex#L6" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -139,17 +167,22 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">request(method :: atom, url :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, body :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, headers :: <a href="http://elixir-lang.org/docs/stable/elixir/Keyword.html#t:t/0">Keyword.t</a>) :: any</code></pre>
+          <pre><code class="elixir">parse(any) :: {:ok, any} | {:error, any}</code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    
+    <p>Parses the http response to return the decoded results as a map.</p>
+
   </section>
 </div>
 
         </section>
+      
+
+      
+
       
         <footer class="footer">
       <p>
