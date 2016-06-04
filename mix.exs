@@ -4,11 +4,13 @@ defmodule ExTumblr.Mixfile do
   def project do
     [app: :ex_tumblr,
      name: "ExTumblr",
+     description: "A client for the Tumblr API v2.",
      source_url: "https://github.com/svarlet/ex_tumblr",
      version: "0.0.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     package: package,
      deps: deps]
   end
 
@@ -17,6 +19,11 @@ defmodule ExTumblr.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger, :httpoison]]
+  end
+
+  defp package do
+    [licenses: ["MIT"],
+     maintainers: ["Sébastien Varlet"]]
   end
 
   # Dependencies can be Hex packages:
