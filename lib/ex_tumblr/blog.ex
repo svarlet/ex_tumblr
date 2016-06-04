@@ -66,8 +66,8 @@ defmodule ExTumblr.Blog do
     {:get, construct_url(blog_identifier, "posts/submission"), :oauth}
   end
 
-  @spec create_create_request(String.t) :: base_request
-  def create_create_request(blog_identifier) do
+  @spec create_post_request(String.t) :: base_request
+  def create_post_request(blog_identifier) do
     {:post, construct_url(blog_identifier, "post"), :oauth}
   end
 
