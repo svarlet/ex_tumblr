@@ -1,4 +1,6 @@
 defprotocol ExTumblr.HTTPResponseParser do
+  @fallback_to_any true
+
   @doc """
   Parses the http response to return the decoded results as a map.
   """
@@ -37,5 +39,16 @@ end
 defimpl ExTumblr.HTTPResponseParser, for: HTTPoison.Error do
   def parse(%HTTPoison.Error{reason: reason}) do
     {:error, reason}
+  end
+end
+
+defimpl ExTumblr.HTTPResponseParser, for: Any do
+  def parse(unsupported_data_type) do
+    require Logger
+    Logger.warn """
+    Unsupported data type, please consider implementing the ExTumblr.HTTPResponseParser
+    protocol for: #{inspect(unsupported_data_type)}
+    """
+    {:error, :unsupported_data_type}
   end
 end
