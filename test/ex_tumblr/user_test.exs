@@ -3,23 +3,35 @@ defmodule ExTumblr.UserTest do
 
   alias ExTumblr.User
 
-  setup do
-    {:ok, params: %{dummy: "param"}, credentials: %{consumer_key: "ck", consumer_secret: "cs", token: "t", token_key: "tk"}}
+  test "info/2 creates a valid request" do
+    {:get, "https://api.tumblr.com/v2/user/info", :oauth} = User.info
   end
 
-  test "info/2 creates a valid request", %{credentials: credentials, params: params} do
-    assert {:get, "https://api.tumblr.com/v2/user/info", ^params, :oauth, ^credentials} = User.info(credentials, params)
+  test "dashboard/2 creates a valid request" do
+    {:get, "https://api.tumblr.com/v2/user/dashboard", :oauth} = User.dashboard
   end
 
-  test "dashboard/2 creates a valid request", %{credentials: credentials, params: params} do
-    assert {:get, "https://api.tumblr.com/v2/user/dashboard", ^params, :oauth, ^credentials} = User.dashboard(credentials, params)
+  test "likes/2 creates a valid request" do
+    {:get, "https://api.tumblr.com/v2/user/likes", :oauth} = User.likes
   end
 
-  test "likes/2 creates a valid request", %{credentials: credentials, params: params} do
-    assert {:get, "https://api.tumblr.com/v2/user/likes", ^params, :oauth, ^credentials} = User.likes(credentials, params)
+  test "following/2 creates a valid request" do
+    {:get, "https://api.tumblr.com/v2/user/following", :oauth} = User.following
   end
 
-  test "following/2 creates a valid request", %{credentials: credentials, params: params} do
-    assert {:get, "https://api.tumblr.com/v2/user/following", ^params, :oauth, ^credentials} = User.following(credentials, params)
+  test "follow/2 creates a valid request" do
+    {:post, "https://api.tumblr.com/v2/user/follow", :oauth} = User.follow
+  end
+
+  test "unfollow/2 creates a valid request" do
+    {:post, "https://api.tumblr.com/v2/user/unfollow", :oauth} = User.unfollow
+  end
+
+  test "like/2 creates a valid request" do
+    {:post, "https://api.tumblr.com/v2/user/like", :oauth} = User.like
+  end
+
+  test "unlike/2 creates a valid request" do
+    {:post, "https://api.tumblr.com/v2/user/unlike", :oauth} = User.unlike
   end
 end

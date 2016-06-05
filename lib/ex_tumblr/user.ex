@@ -1,35 +1,35 @@
 defmodule ExTumblr.User do
   @hostname "https://api.tumblr.com"
 
-  def info(credentials, params) do
-    {:get, "#{@hostname}/v2/user/info", params, :oauth, credentials}
+  def info do
+    {:get, "#{@hostname}/v2/user/info", :oauth}
   end
 
-  def dashboard(credentials, params) do
-    {:get, "#{@hostname}/v2/user/dashboard", params, :oauth, credentials}
+  def dashboard do
+    {:get, "#{@hostname}/v2/user/dashboard", :oauth}
   end
 
-  def likes(credentials, params) do
-    {:get, "#{@hostname}/v2/user/likes", params, :oauth, credentials}
+  def likes do
+    {:get, "#{@hostname}/v2/user/likes", :oauth}
   end
 
-  def following(credentials, params) do
-    {:get, "#{@hostname}/v2/user/following", params, :oauth, credentials}
+  def following do
+    {:get, "#{@hostname}/v2/user/following", :oauth}
   end
 
-  def follow(credentials, params) do
-    {:post, "#{@hostname}/v2/user/follow", params, :oauth, credentials}
+  def follow do
+    {:post, "#{@hostname}/v2/user/follow", :oauth}
   end
 
-  def unfollow(credentials, params) do
-    {:post, "#{@hostname}/v2/user/unfollow", params, :oauth, credentials}
+  def unfollow do
+    {:post, "#{@hostname}/v2/user/unfollow", :oauth}
   end
 
-  def like(credentials, params) do
-    {:post, "#{@hostname}/v2/user/like", params, :oauth, credentials}
+  def like do
+    {:post, "#{@hostname}/v2/user/like", :oauth}
   end
 
-  def unlike(credentials, params) do
-    {:post, "#{@hostname}/v2/user/unlike", params, :oauth, credentials}
+  def unlike do
+    {:post, "#{@hostname}/v2/user/unlike", :oauth}
   end
 end
