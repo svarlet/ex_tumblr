@@ -16,4 +16,20 @@ defmodule ExTumblr.User do
   def following(credentials, params) do
     {:get, "#{@hostname}/v2/user/following", params, :oauth, credentials}
   end
+
+  def follow(credentials, params) do
+    {:post, "#{@hostname}/v2/user/follow", params, :oauth, credentials}
+  end
+
+  def unfollow(credentials, params) do
+    {:post, "#{@hostname}/v2/user/unfollow", params, :oauth, credentials}
+  end
+
+  def like(credentials, params) do
+    {:post, "#{@hostname}/v2/user/like", params, :oauth, credentials}
+  end
+
+  def unlike(credentials, params) do
+    {:post, "#{@hostname}/v2/user/unlike", params, :oauth, credentials}
+  end
 end
