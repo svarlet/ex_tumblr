@@ -1,12 +1,18 @@
 defmodule ExTumblrTest do
-  use ShouldI, async: true
+  use ExUnit.Case, async: true
 
   alias ExTumblr.Credentials
 
-  having "specified a custom HTTP client adapter" do
-    should "send the prepared http request via the custom adapter" do
-      ExTumblr.info "gunkatana.tumblr.com", %Credentials{consumer_key: "lol"}, nil
-      assert_received {:get, "https://api.tumblr.com/v2/blog/gunkatana.tumblr.com/info?api_key=lol", nil, nil}
+  setup do
+    bypass = Bypass.open
+    Application.put_env(:ex_tumblr, :endpoint, "http://localhost:#{bypass.port}")
+    {:ok, bypass: bypass}
+  end
+
+  test "lol", %{bypass: bypass} do
+    Bypass.expect bypass, fn conn ->
+      assert "/avatar/48" == conn.request_path
     end
+    {:ok, response} = ExTumblr.blog_avatar "gunkatana.tumblr.com", 48
   end
 end

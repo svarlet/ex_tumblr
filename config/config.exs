@@ -28,7 +28,7 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
-config :ex_tumblr, api_key: System.get_env("TUMBLR_API_KEY")
-config :ex_tumblr, http_client: ExTumblr.HTTPoisonAdapter
+
+config :ex_tumblr, endpoint: "https://api.tumblr.com"
 
 import_config "#{Mix.env}.exs"

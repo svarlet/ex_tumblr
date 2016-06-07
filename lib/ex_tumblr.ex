@@ -11,7 +11,10 @@ defmodule ExTumblr do
     |> Blog.create_avatar_request(size)
     |> Request.prepare_request_auth(nil, nil)
     |> emit
-    |> process_response
+  end
+
+  defp emit({method, url, body, headers}) do
+    HTTPoison.request(method, url, body || "", headers || [])
   end
 
   [{"info", &Blog.create_info_request/1},
@@ -34,15 +37,6 @@ defmodule ExTumblr do
            |> unquote(init_fun).()
            |> Request.prepare_request_auth(credentials, params)
            |> emit
-           |> process_response
          end
        end)
-
-  defp emit({method, url, body, headers}) do
-    adapter = Application.get_env :ex_tumblr, :http_client
-    Kernel.apply(adapter, :request, [method, url, body, headers])
-  end
-
-  defp process_response({_, response}), do: HTTPResponseParser.parse response
-  defp process_response(anything), do: HTTPResponseParser.parse anything
 end

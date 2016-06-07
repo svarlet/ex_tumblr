@@ -1,7 +1,7 @@
 defmodule ExTumblr.Blog do
   @moduledoc false
 
-  @hostname "https://api.tumblr.com"
+  @hostname Application.get_env :ex_tumblr, :endpoint
 
   @type blog_identifier :: String.t
   @type auth :: :oauth | :api_key_auth | :no_auth
