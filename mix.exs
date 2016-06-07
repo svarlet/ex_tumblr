@@ -44,6 +44,7 @@ defmodule ExTumblr.Mixfile do
      {:dialyxir, "~> 0.3", only: [:dev]},
      {:mix_test_watch, "~> 0.2", only: :dev},
      {:shouldi, "~> 0.3.0", only: :test},
+     {:bypass, "~> 0.5.1", only: :test},
      {:credo, "~> 0.3", only: [:dev, :test]}
     ]
   end
