@@ -28,6 +28,7 @@ defmodule ExTumblr do
   ]
   |> Enum.each(
        fn {name, init_fun} ->
+         @spec unquote(String.to_atom(name))(String.t, ExTumblr.Credentials.t, map) :: HTTPResponseParser.result | HTTPResponseParser.error
          def unquote(String.to_atom(name))(blog_identifier, credentials, params) do
            blog_identifier
            |> unquote(init_fun).()

@@ -1,8 +1,11 @@
 defprotocol ExTumblr.HTTPResponseParser do
   @fallback_to_any true
 
+  @type result :: {:ok, any}
+  @type error :: {:error, any}
+
   @doc """
-  Parses the http response to return the decoded results as a map.
+  Parse the http response.
   """
   @spec parse(any) :: {:ok, any} | {:error, any}
   def parse(http_response)
