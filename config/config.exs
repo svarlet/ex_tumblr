@@ -29,6 +29,6 @@ use Mix.Config
 #
 #     import_config "#{Mix.env}.exs"
 
-config :ex_tumblr, endpoint: "https://api.tumblr.com"
+config :ex_tumblr, hostname: "https://api.tumblr.com"
 
 import_config "#{Mix.env}.exs"

@@ -1,35 +1,33 @@
 defmodule ExTumblr.User do
-  @hostname Application.get_env :ex_tumblr, :endpoint
-
   def info do
-    {:get, "#{@hostname}/v2/user/info", :oauth}
+    {:get, "/v2/user/info", :oauth}
   end
 
   def dashboard do
-    {:get, "#{@hostname}/v2/user/dashboard", :oauth}
+    {:get, "/v2/user/dashboard", :oauth}
   end
 
   def likes do
-    {:get, "#{@hostname}/v2/user/likes", :oauth}
+    {:get, "/v2/user/likes", :oauth}
   end
 
   def following do
-    {:get, "#{@hostname}/v2/user/following", :oauth}
+    {:get, "/v2/user/following", :oauth}
   end
 
   def follow do
-    {:post, "#{@hostname}/v2/user/follow", :oauth}
+    {:post, "/v2/user/follow", :oauth}
   end
 
   def unfollow do
-    {:post, "#{@hostname}/v2/user/unfollow", :oauth}
+    {:post, "/v2/user/unfollow", :oauth}
   end
 
   def like do
-    {:post, "#{@hostname}/v2/user/like", :oauth}
+    {:post, "/v2/user/like", :oauth}
   end
 
   def unlike do
-    {:post, "#{@hostname}/v2/user/unlike", :oauth}
+    {:post, "/v2/user/unlike", :oauth}
   end
 end

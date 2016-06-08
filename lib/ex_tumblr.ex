@@ -1,4 +1,6 @@
 defmodule ExTumblr do
+  require Logger
+
   @moduledoc """
   Provides functions to query the various endpoints of the Tumblr API.
 
@@ -6,14 +8,16 @@ defmodule ExTumblr do
   """
   alias ExTumblr.{Blog, Request, HTTPResponseParser}
 
-  def blog_avatar(blog_identifier, size \\ 64) do
+  def avatar(blog_identifier, size \\ 64) do
     blog_identifier
     |> Blog.create_avatar_request(size)
     |> Request.prepare_request_auth(nil, nil)
     |> emit
   end
 
-  defp emit({method, url, body, headers}) do
+  defp emit({method, endpoint, body, headers}) do
+    url = Application.get_env(:ex_tumblr, :hostname) <> endpoint
+    Logger.info "Sending #{method} request to #{url}"
     HTTPoison.request(method, url, body || "", headers || [])
   end
 
