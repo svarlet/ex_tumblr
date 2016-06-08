@@ -39,6 +39,7 @@ defmodule ExTumblr.InfoTest do
       """
       Bypass.expect context.bypass, fn conn ->
         assert "/v2/blog/gunkatana.tumblr.com/info" == conn.request_path
+        assert "api_key=#{context.credentials.consumer_key}" == conn.query_string
         Plug.Conn.resp(conn, 200, prebaked_response)
       end
       expected =
