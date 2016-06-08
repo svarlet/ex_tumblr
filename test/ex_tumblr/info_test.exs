@@ -12,7 +12,7 @@ defmodule ExTumblr.InfoTest do
       |> assign(credentials: %Credentials{consumer_key: System.get_env "TUMBLR_API_KEY"})
     end
 
-    should "retrieve blog info", context do
+    should "transform a successful response into an Info struct", context do
       prebaked_response = """
       {
         "meta": {
