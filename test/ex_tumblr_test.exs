@@ -7,7 +7,7 @@ defmodule ExTumblrTest do
     {:ok, bypass: bypass}
   end
 
-  test "lol", %{bypass: bypass} do
+  test "handles the special status code returned for avatar requests", %{bypass: bypass} do
     prebaked_response = "avatar_url=https://67.media.tumblr.com/avatar_34abdab07c47_48.png"
     Bypass.expect bypass, fn conn ->
       assert "/v2/blog/gunkatana.tumblr.com/avatar/48" == conn.request_path
