@@ -1,6 +1,6 @@
 defmodule ExTumblr.Utils.Parsing do
   @doc """
-  Transforms a string to any type of map into a struct.
+  Transforms a `%{String.t => any}` type of map into a specific struct.
 
   Keys of the map should be binaries and will be converted to atoms.
 
