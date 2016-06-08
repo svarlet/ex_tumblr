@@ -53,8 +53,7 @@ defmodule ExTumblrTest do
         """
         Bypass.expect context.bypass, fn conn ->
           assert "/v2/blog/gunkatana.tumblr.com/info" == conn.request_path
-          conn
-          |> Plug.Conn.resp(200, prebaked_response)
+          Plug.Conn.resp(conn, 200, prebaked_response)
         end
         {:ok, %HTTPoison.Response{body: prebaked_response}} = ExTumblr.info "gunkatana.tumblr.com", context.credentials, nil
       end
