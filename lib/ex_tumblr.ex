@@ -10,7 +10,6 @@ defmodule ExTumblr do
   """
 
   # [
-  #  {"followers", &Blog.create_followers_request/1},
   #  {"likes", &Blog.create_likes_request/1},
   #  {"posts", &Blog.create_posts_request/1},
   #  {"queued", &Blog.create_queued_posts_request/1},
