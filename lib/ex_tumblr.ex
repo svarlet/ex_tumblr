@@ -16,9 +16,13 @@ defmodule ExTumblr do
   end
 
   defp emit({method, endpoint, body, headers}) do
-    url = Application.get_env(:ex_tumblr, :hostname) <> endpoint
+    url = hostname <> endpoint
     Logger.info "Sending #{method} request to #{url}"
     HTTPoison.request(method, url, body || "", headers || [])
+  end
+
+  defp hostname do
+    Application.get_env(:ex_tumblr, :hostname) || "https://api.tumblr.com"
   end
 
   [{"info", &Blog.create_info_request/1},
