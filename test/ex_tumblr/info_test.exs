@@ -42,7 +42,7 @@ defmodule ExTumblr.InfoTest do
         assert "/v2/blog/gunkatana.tumblr.com/info" == conn.request_path
         Plug.Conn.resp conn, 200, @prebaked_response
       end
-      Info.request "gunkatana.tumblr.com", context.credentials, nil
+      Info.request "gunkatana.tumblr.com", context.credentials
     end
 
     should "provide the Tumblr API key as a query parameter", context do
@@ -50,7 +50,7 @@ defmodule ExTumblr.InfoTest do
         assert "api_key=#{context.credentials.consumer_key}" == conn.query_string
         Plug.Conn.resp(conn, 200, @prebaked_response)
       end
-      Info.request "gunkatana.tumblr.com", context.credentials, nil
+      Info.request "gunkatana.tumblr.com", context.credentials
     end
 
     should "transform a successful response into an Info struct", context do
@@ -68,7 +68,7 @@ defmodule ExTumblr.InfoTest do
           ask_anon: false,
           is_blocked_from_primary: false
         }
-      assert expected == Info.request "gunkatana.tumblr.com", context.credentials, nil
+      assert expected == Info.request "gunkatana.tumblr.com", context.credentials
     end
   end
 end

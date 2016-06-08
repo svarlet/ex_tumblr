@@ -35,11 +35,11 @@ defmodule ExTumblr.Info do
 
   [Official documentation](https://www.tumblr.com/docs/en/api/v2#blog-info)
   """
-  @spec request(String.t, Credentials.t, map) :: t
-  def request(blog_identifier, credentials, params) do
+  @spec request(String.t, Credentials.t) :: t
+  def request(blog_identifier, credentials) do
     blog_identifier
     |> create_info_request
-    |> Auth.sign(credentials, params)
+    |> Auth.sign(credentials, nil)
     |> emit
     |> parse
   end
