@@ -1,4 +1,4 @@
-defmodule ExTumblr.Request do
+defmodule ExTumblr.Auth do
   @moduledoc false
 
   alias ExTumblr.Credentials
@@ -12,13 +12,13 @@ defmodule ExTumblr.Request do
   @type headers :: {String.t, String.t}
   @type signed_request :: {method, url, body, headers}
 
-  @spec prepare_request_auth(base_request, Credentials.t, map) :: signed_request
-  def prepare_request_auth({method, url, :oauth}, credentials, params) do
+  @spec sign(base_request, Credentials.t, map) :: signed_request
+  def sign({method, url, :oauth}, credentials, params) do
     {headers, body} = sign_request_with_oauth(method, url, credentials, params)
     {method, url, {:form, body}, [headers]}
   end
 
-  def prepare_request_auth({:get, url, :api_key_auth}, credentials, params) do
+  def sign({:get, url, :api_key_auth}, credentials, params) do
     query =
       (params || Map.new)
       |> Map.put("api_key", credentials.consumer_key)
@@ -26,7 +26,7 @@ defmodule ExTumblr.Request do
     {:get, "#{url}?#{query}", nil, nil}
   end
 
-  def prepare_request_auth({:get, url, :no_auth}, _credentials, params) do
+  def sign({:get, url, :no_auth}, _credentials, params) do
     query = URI.encode_query(params || Map.new)
     case query do
       "" -> {:get, url, nil, nil}

@@ -1,27 +1,12 @@
 defmodule ExTumblr.Blog do
   @moduledoc false
 
-  def create_info_request(blog_identifier) do
-    {:get, construct_url(blog_identifier, "info"), :api_key_auth}
-  end
-
-  defp construct_url(blog_identifier, endpoint) do
-    b_id =
-      blog_identifier
-      |> normalize_blog_identifier
-    "/v2/blog/#{b_id}/#{endpoint}"
-  end
-
-  defp normalize_blog_identifier(blog_identifier) do
-    if String.match? blog_identifier, ~r/\.tumblr\.com/ do
-      blog_identifier
-    else
-      blog_identifier <> ".tumblr.com"
-    end
-  end
-
-  def create_avatar_request(blog_identifier, size) when size in [16, 24, 30, 40, 48, 64, 96, 128, 512] do
-    {:get, construct_url(blog_identifier, "avatar/#{size}"), :no_auth}
+  @doc """
+  Construct the url path for a blog endpoint.
+  """
+  @spec construct_url(String.t, String.t) :: String.t
+  def construct_url(blog_identifier, endpoint) do
+    "/v2/blog/#{blog_identifier}/#{endpoint}"
   end
 
   def create_followers_request(blog_identifier) do
