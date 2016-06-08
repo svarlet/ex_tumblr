@@ -9,10 +9,6 @@ defmodule ExTumblr.Blog do
     "/v2/blog/#{blog_identifier}/#{endpoint}"
   end
 
-  def create_followers_request(blog_identifier) do
-    {:get, construct_url(blog_identifier, "followers"), :oauth}
-  end
-
   def create_likes_request(blog_identifier) do
     {:get, construct_url(blog_identifier, "likes"), :api_key_auth}
   end

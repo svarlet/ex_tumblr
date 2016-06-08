@@ -2,6 +2,7 @@ defmodule ExTumblr.Info do
   use ExTumblr.Transport
 
   alias ExTumblr.{Auth, Blog}
+  alias ExTumblr.Utils.Parsing
 
   @moduledoc """
   Provide function and type definition for the blog info endpoint.
@@ -48,19 +49,12 @@ defmodule ExTumblr.Info do
     {:get, Blog.construct_url(blog_identifier, "info"), :api_key_auth}
   end
 
+  @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)
+
   defp parse({:ok, %HTTPoison.Response{body: body}}) do
     body
     |> Poison.decode!
     |> get_in(["response", "blog"])
-    |> to_struct
-  end
-
-  @valid_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)
-
-  @spec to_struct(map) :: t
-  defp to_struct(data) when is_map(data) do
-    data
-    |> Map.take(@valid_keys)
-    |> Enum.reduce(%__MODULE__{}, fn ({k, v}, acc) -> %{acc | String.to_atom(k) => v} end)
+    |> Parsing.to_struct(__MODULE__, @accepted_keys)
   end
 end

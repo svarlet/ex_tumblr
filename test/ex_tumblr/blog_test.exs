@@ -3,10 +3,6 @@ defmodule ExTumblr.BlogTest do
 
   alias ExTumblr.Blog
 
-  test "followers" do
-    {:get, "/v2/blog/gunkatana.tumblr.com/followers", :oauth} = Blog.create_followers_request("gunkatana.tumblr.com")
-  end
-
   test "likes" do
     {:get, "/v2/blog/gunkatana.tumblr.com/likes", :api_key_auth} = Blog.create_likes_request("gunkatana.tumblr.com")
   end
