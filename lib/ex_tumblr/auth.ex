@@ -34,25 +34,31 @@ defmodule ExTumblr.Auth do
     end
   end
 
-  @spec sign_request_with_oauth(method, url, Credentials.t, Keyword.t) :: {authorization_headers, Keyword.t}
+  @spec sign_request_with_oauth(method, url, Credentials.t, map) :: {authorization_headers, [{String.t, any}]}
   defp sign_request_with_oauth(method, url, credentials, params) do
-    to_oauther_creds = fn %Credentials{} = creds ->
+    oauther_creds =
       OAuther.credentials(
-        consumer_key: creds.consumer_key,
-        consumer_secret: creds.consumer_secret,
-        token: creds.token,
-        token_secret: creds.token_secret
+        consumer_key: credentials.consumer_key,
+        consumer_secret: credentials.consumer_secret,
+        token: credentials.token,
+        token_secret: credentials.token_secret
       )
-    end
 
-    to_string_tag = fn {key, value} when is_atom(key) -> {to_string(key), value} end
+    stringify_tuple_tag =
+      fn {key, value} when is_atom(key) ->
+        {to_string(key), value}
+      end
 
-    to_keyword = fn list ->
-      (list || Keyword.new)
-      |> Enum.map(to_string_tag)
-    end
+    map_to_tuples =
+      fn map ->
+        (map || Map.new)
+        |> Map.to_list
+        |> Enum.map(stringify_tuple_tag)
+      end
 
-    OAuther.sign(to_string(method), url, to_keyword.(params), to_oauther_creds.(credentials))
+    require Logger
+    Logger.warn "OAuther.sign(#{method}, #{url}, #{inspect map_to_tuples.(params)}, #{inspect oauther_creds})"
+    OAuther.sign(to_string(method), url, map_to_tuples.(params), oauther_creds)
     |> OAuther.header
   end
 end
