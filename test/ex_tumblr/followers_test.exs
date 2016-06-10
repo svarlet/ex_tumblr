@@ -38,7 +38,7 @@ defmodule ExTumblr.FollowersTest do
       |> assign(credentials: %Credentials{consumer_secret: "ct", consumer_key: "ck", token: "t", token_secret: "ts"})
     end
 
-    should "send a post request to /v2/blog/gunkatana.tumblr.com/followers", context do
+    should "send a get request to /v2/blog/gunkatana.tumblr.com/followers", context do
       Bypass.expect context.bypass, fn conn ->
         assert "GET" == conn.method
         assert "/v2/blog/gunkatana.tumblr.com/followers" == conn.request_path
