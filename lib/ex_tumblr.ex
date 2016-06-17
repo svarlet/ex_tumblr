@@ -1,33 +1,21 @@
 defmodule ExTumblr do
-  require Logger
+  defmodule Credentials do
+    @typedoc """
+    Defines a structure to represent API credentials
+    """
 
-  alias ExTumblr.{Blog, Auth}
+    @type t :: %ExTumblr.Credentials{}
 
-  @moduledoc """
-  Provides functions to query the various endpoints of the Tumblr API.
+    defstruct [:consumer_key, :consumer_secret, :token, :token_secret]
+  end
 
-  See https://www.tumblr.com/docs/en/api/v2
-  """
+  defmodule Client do
+    @typedoc """
+    Defines a struct to store the API hostname and credentials.
+    """
 
-  # [
-  #  {"likes", &Blog.create_likes_request/1},
-  #  {"posts", &Blog.create_posts_request/1},
-  #  {"queued", &Blog.create_queued_posts_request/1},
-  #  {"drafts", &Blog.create_drafts_request/1},
-  #  {"submissions", &Blog.create_drafts_request/1},
-  #  {"post", &Blog.create_post_request/1},
-  #  {"edit", &Blog.create_edit_request/1},
-  #  {"reblog", &Blog.create_reblog_request/1},
-  #  {"delete", &Blog.create_delete_request/1}
-  # ]
-  # |> Enum.each(
-  #      fn {name, init_fun} ->
-  #        @spec unquote(String.to_atom(name))(String.t, ExTumblr.Credentials.t, map) :: HTTPResponseParser.result | HTTPResponseParser.error
-  #        def unquote(String.to_atom(name))(blog_identifier, credentials, params) do
-  #          blog_identifier
-  #          |> unquote(init_fun).()
-  #          |> Auth.sign(credentials, params)
-  #          |> emit
-  #        end
-  #      end)
+    @type t :: %__MODULE__{hostname: String.t, credentials: Credentials.t}
+
+    defstruct [:hostname, :credentials]
+  end
 end

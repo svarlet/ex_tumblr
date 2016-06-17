@@ -1,7 +1,7 @@
 defmodule ExTumblr.Info do
   use ExTumblr.Transport
 
-  alias ExTumblr.{Auth, Blog}
+  alias ExTumblr.{Client, Auth, Blog}
   alias ExTumblr.Utils.Parsing
 
   @moduledoc """
@@ -35,18 +35,18 @@ defmodule ExTumblr.Info do
 
   [Official documentation](https://www.tumblr.com/docs/en/api/v2#blog-info)
   """
-  @spec request(String.t, Credentials.t) :: t
-  def request(blog_identifier, credentials) do
+  @spec request(String.t, Client.t) :: t
+  def request(client, blog_identifier) do
     blog_identifier
     |> create_info_request
-    |> Auth.sign(credentials, nil)
+    |> Auth.sign(client, nil)
     |> emit
     |> parse
   end
 
   @spec create_info_request(String.t) :: tuple
   defp create_info_request(blog_identifier) do
-    {:get, Blog.construct_url(blog_identifier, "info"), :api_key_auth}
+    {:get, Blog.path_for(blog_identifier, "info"), :api_key_auth}
   end
 
   @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)

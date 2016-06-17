@@ -1,38 +1,42 @@
 defmodule ExTumblr.Auth do
   @moduledoc false
 
-  alias ExTumblr.Credentials
+  alias ExTumblr.Client
 
   @type authorization_headers :: {String.t, String.t}
   @type auth :: :oauth | :api_key_auth | :no_auth
-  @type base_request :: {method, url, auth}
+  @type base_request :: {method, path, auth}
   @type method :: :get | :post
   @type url :: String.t
+  @type path :: String.t
   @type body :: {:form, Keyword.t}
   @type headers :: {String.t, String.t}
   @type signed_request :: {method, url, body, headers}
 
-  @spec sign(base_request, Credentials.t, map) :: signed_request
-  def sign({method, url, :oauth}, credentials, params) do
-    {headers, body} = sign_request_with_oauth(method, url, credentials, params)
+  @spec sign(base_request, Client.t, map) :: signed_request
+  def sign({method, path, :oauth}, client, params) do
+    url = build_url(client.hostname, path)
+    {headers, body} = sign_request_with_oauth(method, url, client.credentials, params)
     {method, url, {:form, body}, [headers]}
   end
 
-  def sign({:get, url, :api_key_auth}, credentials, params) do
+  def sign({:get, path, :api_key_auth}, client, params) do
     query =
       (params || Map.new)
-      |> Map.put("api_key", credentials.consumer_key)
+      |> Map.put("api_key", client.credentials.consumer_key)
       |> URI.encode_query
-    {:get, "#{url}?#{query}", nil, nil}
+    {:get, build_url(client.hostname, path, query), nil, nil}
   end
 
-  def sign({:get, url, :no_auth}, _credentials, params) do
+  def sign({:get, path, :no_auth}, client, params) do
     query = URI.encode_query(params || Map.new)
-    case query do
-      "" -> {:get, url, nil, nil}
-      _ -> {:get, "#{url}?#{query}", nil, nil}
-    end
+    {:get, build_url(client.hostname, path, query), nil, nil}
   end
+
+  @spec build_url(String.t, String.t, String.t) :: String.t
+  defp build_url(hostname, path, query \\ nil)
+  defp build_url(hostname, path, query) when query in [nil, ""], do: hostname <> path
+  defp build_url(hostname, path, query), do: hostname <> path <> "?" <> query
 
   @spec sign_request_with_oauth(method, url, Credentials.t, map) :: {authorization_headers, [{String.t, any}]}
   defp sign_request_with_oauth(method, url, credentials, params) do

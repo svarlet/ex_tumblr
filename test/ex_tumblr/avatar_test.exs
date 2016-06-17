@@ -1,10 +1,12 @@
 defmodule ExTumblr.AvatarTest do
-  use ShouldI, async: true
+  use ShouldI
 
   setup context do
     bypass = Bypass.open
-    Application.put_env(:ex_tumblr, :hostname, "http://localhost:#{bypass.port}")
-    assign context, bypass: bypass
+    client = %ExTumblr.Client{hostname: "http://localhost:#{bypass.port}"}
+    context
+    |> assign(bypass: bypass)
+    |> assign(client: client)
   end
 
   should "handle the particular response of the avatar endpoint", context do
@@ -15,6 +17,6 @@ defmodule ExTumblr.AvatarTest do
       conn
       |> Plug.Conn.resp(200, prebaked_response)
     end
-    assert avatar_url == ExTumblr.Avatar.request "gunkatana.tumblr.com", 48
+    assert avatar_url == ExTumblr.Avatar.request(context.client, "gunkatana.tumblr.com", 48)
   end
 end

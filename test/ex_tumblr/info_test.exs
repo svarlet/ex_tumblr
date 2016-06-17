@@ -1,5 +1,5 @@
 defmodule ExTumblr.InfoTest do
-  use ShouldI, async: true
+  use ExTumblr.BypassSetupTemplate, async: true
 
   alias ExTumblr.{Credentials, Info}
 
@@ -29,28 +29,20 @@ defmodule ExTumblr.InfoTest do
   """
 
   having "a running remote api" do
-    setup context do
-      bypass = Bypass.open
-      Application.put_env(:ex_tumblr, :hostname, "http://localhost:#{bypass.port}")
-      context
-      |> assign(bypass: bypass)
-      |> assign(credentials: %Credentials{consumer_key: System.get_env "TUMBLR_API_KEY"})
-    end
-
     should "query the info endpoint", context do
       Bypass.expect context.bypass, fn conn ->
         assert "/v2/blog/gunkatana.tumblr.com/info" == conn.request_path
         Plug.Conn.resp conn, 200, @prebaked_response
       end
-      Info.request "gunkatana.tumblr.com", context.credentials
+      Info.request(context.client, "gunkatana.tumblr.com")
     end
 
     should "provide the Tumblr API key as a query parameter", context do
       Bypass.expect context.bypass, fn conn ->
-        assert "api_key=#{context.credentials.consumer_key}" == conn.query_string
+        assert "api_key=#{context.client.credentials.consumer_key}" == conn.query_string
         Plug.Conn.resp(conn, 200, @prebaked_response)
       end
-      Info.request "gunkatana.tumblr.com", context.credentials
+      Info.request(context.client, "gunkatana.tumblr.com")
     end
 
     should "transform a successful response into an Info struct", context do
@@ -68,7 +60,7 @@ defmodule ExTumblr.InfoTest do
           ask_anon: false,
           is_blocked_from_primary: false
         }
-      assert expected == Info.request "gunkatana.tumblr.com", context.credentials
+      assert expected == Info.request(context.client, "gunkatana.tumblr.com")
     end
   end
 end
