@@ -47,17 +47,19 @@ defmodule ExTumblr.FollowersTest do
     Followers.request(context.client, "gunkatana.tumblr.com", %{limit: 5, offset: 1})
   end
 
-  # should "pass the oauth credentials via the headers of the request", context do
-  #   Bypass.expect context.bypass, fn conn ->
-  #     Plug.Conn.resp conn, 200, @prebaked_response
-  #   end
-  #   Followers.request("gunkatana.tumblr.com", context.credentials, nil)
-  # end
+  should "pass the oauth credentials via the headers of the request", context do
+    flunk "to do"
+    Bypass.expect context.bypass, fn conn ->
+      Plug.Conn.resp conn, 200, @prebaked_response
+    end
+    Followers.request(context.client, "gunkatana.tumblr.com", nil)
+  end
 
-  # should "parse it into a followers struct", context do
-  #   Bypass.expect context.bypass, fn conn ->
-  #     Plug.Conn.resp conn, 200, @prebaked_response
-  #   end
-  #   Followers.request("gunkatana.tumblr.com", context.credentials, nil)
-  # end
+  should "parse it into a followers struct", context do
+    flunk "to do"
+    Bypass.expect context.bypass, fn conn ->
+      Plug.Conn.resp conn, 200, @prebaked_response
+    end
+    Followers.request(context.client, "gunkatana.tumblr.com", nil)
+  end
 end
