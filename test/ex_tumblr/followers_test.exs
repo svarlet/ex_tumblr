@@ -48,8 +48,9 @@ defmodule ExTumblr.FollowersTest do
   end
 
   should "pass the oauth credentials via the headers of the request", context do
-    flunk "to do"
     Bypass.expect context.bypass, fn conn ->
+      oauth_headers = Plug.Conn.get_req_header(conn, "authorization")
+      refute oauth_headers in [nil, []]
       Plug.Conn.resp conn, 200, @prebaked_response
     end
     Followers.request(context.client, "gunkatana.tumblr.com", nil)
