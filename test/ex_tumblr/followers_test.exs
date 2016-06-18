@@ -95,4 +95,25 @@ defmodule ExTumblr.FollowersTest do
       ]
     }
   end
+
+  @prebaked_empty_response """
+  {
+    "meta": {
+      "status": 200,
+      "msg": "OK"
+    },
+    "response": {
+      "total_users": 0,
+      "users":  []
+    }
+  }
+  """
+
+  should "handle successfully a successful response containing 0 followers", context do
+    Bypass.expect context.bypass, fn conn ->
+      Plug.Conn.resp conn, 200, @prebaked_empty_response
+    end
+    followers = Followers.request(context.client, "gunkatana.tumblr.com", nil)
+    assert followers == %Followers{total_users: 0, users: []}
+  end
 end
