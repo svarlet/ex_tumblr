@@ -1,4 +1,8 @@
 defmodule ExTumblr.Follower do
+  @moduledoc """
+  Define a struct and functions to manage a blog follower.
+  """
+
   @typedoc """
   A struct representing a blog follower.
   [Official documentation](https://www.tumblr.com/docs/en/api/v2#blog-followers)
@@ -14,17 +18,25 @@ defmodule ExTumblr.Follower do
     following: false,
     url: nil,
     updated: 0
+
+  alias ExTumblr.Utils.Parsing
+
+  @spec parse(%{String.t => any}) :: t
+  def parse(raw_map) do
+    Parsing.to_struct(raw_map, __MODULE__, ~w(name following url updated))
+  end
 end
 
 defmodule ExTumblr.Followers do
-  use ExTumblr.Transport
-
-  alias ExTumblr.{Client, Blog, Auth}
-
   @moduledoc """
   Provide a request function to query the followers endpoint.
   [Official documentation](https://www.tumblr.com/docs/en/api/v2#blog-followers)
   """
+
+  use ExTumblr.Transport
+
+  alias ExTumblr.{Client, Blog, Auth, Follower}
+  alias ExTumblr.Utils.Parsing
 
   @type t :: %__MODULE__{
     total_users: non_neg_integer,
@@ -48,6 +60,14 @@ defmodule ExTumblr.Followers do
   end
 
   defp parse({:ok, %HTTPoison.Response{body: body}}) do
-    nil
+    body
+    |> Poison.decode!
+    |> Map.get("response")
+    |> Parsing.to_struct(__MODULE__, ~w(total_users users))
+    |> parse_each_follower
+  end
+
+  defp parse_each_follower(%__MODULE__{users: raw_users} = followers) do
+    %__MODULE__{followers | users: Enum.map(raw_users, &Follower.parse/1)}
   end
 end

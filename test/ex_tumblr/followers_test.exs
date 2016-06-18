@@ -1,7 +1,23 @@
+defmodule ExTumblr.FollowerTest do
+  use ExUnit.Case, async: true
+
+  alias ExTumblr.Follower
+
+  test "parsing a string->any map should populate a Follower struct" do
+    raw_map = %{
+      "name" => "seb",
+      "following" => true,
+      "url" => "dummy_url",
+      "updated" => 424242
+    }
+    assert %Follower{name: "seb", following: true, url: "dummy_url", updated: 424242} == Follower.parse(raw_map)
+  end
+end
+
 defmodule ExTumblr.FollowersTest do
   use ExTumblr.BypassSetupTemplate, async: true
 
-  alias ExTumblr.{Client, Followers, Credentials}
+  alias ExTumblr.{Client, Follower, Followers, Credentials}
 
   @prebaked_response """
   {
@@ -10,7 +26,7 @@ defmodule ExTumblr.FollowersTest do
       "msg": "OK"
     },
     "response": {
-      "total_users": 2684,
+      "total_users": 2,
       "users":  [
         {
           "name": "david",
@@ -56,11 +72,27 @@ defmodule ExTumblr.FollowersTest do
     Followers.request(context.client, "gunkatana.tumblr.com", nil)
   end
 
-  should "parse it into a followers struct", context do
-    flunk "to do"
+  should "parse the http response into a followers struct", context do
     Bypass.expect context.bypass, fn conn ->
       Plug.Conn.resp conn, 200, @prebaked_response
     end
-    Followers.request(context.client, "gunkatana.tumblr.com", nil)
+    followers = Followers.request(context.client, "gunkatana.tumblr.com", nil)
+    assert followers == %Followers{
+      total_users: 2,
+      users: [
+        %Follower{
+          name: "david",
+          following: true,
+          url: "http://www.davidslog.com",
+          updated: 1308781073
+        },
+        %Follower{
+          name: "ben",
+          following: true,
+          url: "http://bengold.tv",
+          updated: 1308841333
+        }
+      ]
+    }
   end
 end
