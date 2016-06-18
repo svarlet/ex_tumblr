@@ -1,6 +1,8 @@
 defmodule ExTumblr.Follower do
   @moduledoc """
   Define a struct and functions to manage a blog follower.
+  See [Official documentation](https://www.tumblr.com/docs/en/api/v2#blog-followers)
+  about the followers endpoint.
   """
 
   @typedoc """
@@ -21,6 +23,11 @@ defmodule ExTumblr.Follower do
 
   alias ExTumblr.Utils.Parsing
 
+  @doc """
+  Transform a map into a Follower struct.
+
+  Keys must be strings, values can be any type.
+  """
   @spec parse(%{String.t => any}) :: t
   def parse(raw_map) do
     Parsing.to_struct(raw_map, __MODULE__, ~w(name following url updated))
