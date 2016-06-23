@@ -10,16 +10,16 @@ defmodule ExTumblr.Follower do
   [Official documentation](https://www.tumblr.com/docs/en/api/v2#blog-followers)
   """
   @type t :: %__MODULE__{
-    name: String.t,
+    name:      String.t,
     following: boolean,
-    url: String.t,
-    updated: non_neg_integer
+    url:       String.t,
+    updated:   non_neg_integer
   }
 
   defstruct name: nil,
     following: false,
-    url: nil,
-    updated: 0
+    url:       nil,
+    updated:   0
 
   alias ExTumblr.Utils.Parsing
 
@@ -47,7 +47,7 @@ defmodule ExTumblr.Followers do
 
   @type t :: %__MODULE__{
     total_users: non_neg_integer,
-    users: [ExTumblr.Follower.t]
+    users:       [ExTumblr.Follower.t]
   }
 
   defstruct total_users: 0, users: nil
