@@ -13,10 +13,6 @@ defmodule ExTumblr.Blog do
     {:get, path_for(blog_identifier, "likes"), :api_key_auth}
   end
 
-  def create_posts_request(blog_identifier) do
-    {:get, path_for(blog_identifier, "posts"), :api_key_auth}
-  end
-
   def create_queued_posts_request(blog_identifier) do
     {:get, path_for(blog_identifier, "posts/queue"), :oauth}
   end

@@ -7,10 +7,6 @@ defmodule ExTumblr.BlogTest do
     {:get, "/v2/blog/gunkatana.tumblr.com/likes", :api_key_auth} = Blog.create_likes_request("gunkatana.tumblr.com")
   end
 
-  test "posts" do
-    {:get, "/v2/blog/gunkatana.tumblr.com/posts", :api_key_auth} = Blog.create_posts_request("gunkatana.tumblr.com")
-  end
-
   test "queued_posts" do
     {:get, "/v2/blog/gunkatana.tumblr.com/posts/queue", :oauth} = Blog.create_queued_posts_request("gunkatana.tumblr.com")
   end
