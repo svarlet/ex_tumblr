@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.Followers – ExTumblr v0.0.1</title>
+    <title>ExTumblr.Follower – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.Followers
+        ExTumblr.Follower
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/followers.ex#L37" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/followers.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,8 +72,9 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Provide a request function to query the followers endpoint.
-<a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a></p>
+          <p>Define a struct and functions to manage a blog follower.
+See <a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a>
+about the followers endpoint.</p>
 
         </section>
       
@@ -96,6 +97,10 @@
     <a href="#t:t/0">t()</a>
   </div>
   
+    <div class="summary-synopsis"><p>A struct representing a blog follower.
+<a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a></p>
+</div>
+  
 </div>
 
   </div>
@@ -108,8 +113,11 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#request/3">request(client, blog_identifier, params)</a>
+    <a href="#parse/1">parse(raw_map)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Transform a map into a Follower struct</p>
+</div>
   
 </div>
 
@@ -133,7 +141,11 @@
           </h1>
           <div class="types-list">
             <div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Followers{total_users: non_neg_integer, users: [<a href="ExTumblr.Follower.html#t:t/0">ExTumblr.Follower.t</a>]}</code></pre>
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Follower{following: boolean, name: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, updated: non_neg_integer, url: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
+  
+    <div class="typespec-doc"><p>A struct representing a blog follower.
+<a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a></p>
+</div>
   
 </div>
 
@@ -149,14 +161,14 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="request/3">
+          <div class="detail" id="parse/1">
   <div class="detail-header">
-    <a href="#request/3" class="detail-link" title="Link to this function">
+    <a href="#parse/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">request(client, blog_identifier, params)</span>
+    <span class="signature">parse(raw_map)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/followers.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/followers.ex#L32" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -166,13 +178,15 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">request(<a href="ExTumblr.Client.html#t:t/0">ExTumblr.Client.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, map) :: <a href="#t:t/0">t</a></code></pre>
+          <pre><code class="elixir">parse(%{optional(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) => any}) :: <a href="#t:t/0">t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    
+    <p>Transform a map into a Follower struct.</p>
+<p>Keys must be strings, values can be any type.</p>
+
   </section>
 </div>
 

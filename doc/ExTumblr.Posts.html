@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.Tag – ExTumblr v0.0.1</title>
+    <title>ExTumblr.Posts – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -49,8 +49,6 @@
     
 
     
-      <li><a id="protocols-list" href="#full-list">Protocols</a></li>
-    
   </ul>
 
   <ul id="full-list" class="sidebar-fullList"></ul>
@@ -63,15 +61,21 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.Tag
+        ExTumblr.Posts
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/tag.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/posts.ex#L51" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
       </h1>
 
+      
+        <section id="moduledoc" class="docstring">
+          <p>Types and functions to retrieves blog posts.
+<a href="https://www.tumblr.com/docs/en/api/v2#posts">Official documentation</a></p>
+
+        </section>
       
 
       
@@ -83,6 +87,23 @@
             Summary
           </h1>
           
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>A struct to represent the response content from the posts endpoint.
+<a href="https://www.tumblr.com/docs/en/api/v2#posts">Official documentation</a></p>
+</div>
+  
+</div>
+
+  </div>
+
 
           
   <div class="summary-functions summary">
@@ -91,7 +112,7 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#tagged/0">tagged()</a>
+    <a href="#request/3">request(client, blog_identifier, params)</a>
   </div>
   
 </div>
@@ -107,6 +128,26 @@
       
 
       
+        <section id="types" class="types details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <i class="icon-link"></i>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div id="t:t/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Posts{blog: <a href="ExTumblr.Info.html#t:t/0">ExTumblr.Info.t</a>, posts: [<a href="ExTumblr.Post.html#t:t/0">ExTumblr.Post.t</a>]}</code></pre>
+  
+    <div class="typespec-doc"><p>A struct to represent the response content from the posts endpoint.
+<a href="https://www.tumblr.com/docs/en/api/v2#posts">Official documentation</a></p>
+</div>
+  
+</div>
+
+          </div>
+        </section>
+      
 
       
         <section id="functions" class="details-list">
@@ -116,18 +157,27 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="tagged/0">
+          <div class="detail" id="request/3">
   <div class="detail-header">
-    <a href="#tagged/0" class="detail-link" title="Link to this function">
+    <a href="#request/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">tagged()</span>
+    <span class="signature">request(client, blog_identifier, params)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/tag.ex#L2" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/posts.ex#L74" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">request(<a href="ExTumblr.Client.html#t:t/0">ExTumblr.Client.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, map) :: <a href="#t:t/0">t</a></code></pre>
+        
+      </div>
+    </div>
   
   <section class="docstring">
     

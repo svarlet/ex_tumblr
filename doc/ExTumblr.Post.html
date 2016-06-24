@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.HTTPResponseParser – ExTumblr v0.0.1</title>
+    <title>ExTumblr.Post – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
-  <body data-type="protocols">
+  <body data-type="modules">
 
     <div class="main">
 <button class="sidebar-toggle">
@@ -49,8 +49,6 @@
     
 
     
-      <li><a id="protocols-list" href="#full-list">Protocols</a></li>
-    
   </ul>
 
   <ul id="full-list" class="sidebar-fullList"></ul>
@@ -63,17 +61,20 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.HTTPResponseParser
-        
-          <small>protocol</small>
+        ExTumblr.Post
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_response_parser.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/posts.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
       </h1>
 
+      
+        <section id="moduledoc" class="docstring">
+          <p>Struct and functions to represent and manage a post.</p>
+
+        </section>
       
 
       
@@ -91,18 +92,6 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:error/0">error()</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#t:result/0">result()</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#t:t/0">t()</a>
   </div>
   
@@ -118,11 +107,8 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#parse/1">parse(http_response)</a>
+    <a href="#parse/1">parse(raw_post)</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Parse the http response</p>
-</div>
   
 </div>
 
@@ -145,16 +131,8 @@
             Types
           </h1>
           <div class="types-list">
-            <div id="t:error/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:error/0">error</a> :: {:error, any}</code></pre>
-  
-</div>
-<div id="t:result/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:result/0">result</a> :: {:ok, any}</code></pre>
-  
-</div>
-<div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: term</code></pre>
+            <div id="t:t/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Post{blog_name: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, bookmarklet: boolean, date: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, format: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, id: non_neg_integer, liked: boolean, mobile: boolean, post_url: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, reblog_key: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, source_title: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, source_url: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, state: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, tags: [<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>], timestamp: non_neg_integer, total_posts: non_neg_integer, type: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
   
 </div>
 
@@ -175,26 +153,16 @@
     <a href="#parse/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">parse(http_response)</span>
+    <span class="signature">parse(raw_post)</span>
       
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/http_response_parser.ex#L11" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/posts.ex#L45" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">parse(any) :: {:ok, any} | {:error, any}</code></pre>
-        
-      </div>
-    </div>
-  
   <section class="docstring">
-    <p>Parse the http response.</p>
-
+    
   </section>
 </div>
 
