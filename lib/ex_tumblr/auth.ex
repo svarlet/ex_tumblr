@@ -33,12 +33,10 @@ defmodule ExTumblr.Auth do
     {:get, build_url(client.hostname, path, query), nil, nil}
   end
 
-  @spec build_url(String.t, String.t, String.t) :: String.t
   defp build_url(hostname, path, query \\ nil)
   defp build_url(hostname, path, query) when query in [nil, ""], do: hostname <> path
   defp build_url(hostname, path, query), do: hostname <> path <> "?" <> query
 
-  @spec sign_request_with_oauth(method, url, Credentials.t, map) :: {authorization_headers, [{String.t, any}]}
   defp sign_request_with_oauth(method, url, credentials, params) do
     oauther_creds =
       OAuther.credentials(
