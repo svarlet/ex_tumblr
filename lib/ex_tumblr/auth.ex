@@ -9,8 +9,8 @@ defmodule ExTumblr.Auth do
   @type method :: :get | :post
   @type url :: String.t
   @type path :: String.t
-  @type body :: {:form, Keyword.t}
-  @type headers :: {String.t, String.t}
+  @type body :: {:form, Keyword.t} | nil
+  @type headers :: {String.t, String.t} | nil
   @type signed_request :: {method, url, body, headers}
 
   @spec sign(base_request, Client.t, map) :: signed_request
@@ -60,8 +60,6 @@ defmodule ExTumblr.Auth do
         |> Enum.map(stringify_tuple_tag)
       end
 
-    require Logger
-    Logger.warn "OAuther.sign(#{method}, #{url}, #{inspect map_to_tuples.(params)}, #{inspect oauther_creds})"
     OAuther.sign(to_string(method), url, map_to_tuples.(params), oauther_creds)
     |> OAuther.header
   end
