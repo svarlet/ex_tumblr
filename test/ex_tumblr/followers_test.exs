@@ -3,7 +3,7 @@ defmodule ExTumblr.FollowerTest do
 
   alias ExTumblr.Follower
 
-  test "parsing a string->any map should populate a Follower struct" do
+  test "parsing a string->any map test populate a Follower struct" do
     raw_map = %{
       "name" => "seb",
       "following" => true,
@@ -45,7 +45,7 @@ defmodule ExTumblr.FollowersTest do
   }
   """
 
-  should "send a get request to /v2/blog/gunkatana.tumblr.com/followers", context do
+  test "send a get request to /v2/blog/gunkatana.tumblr.com/followers", context do
     Bypass.expect context.bypass, fn conn ->
       assert "GET" == conn.method
       assert "/v2/blog/gunkatana.tumblr.com/followers" == conn.request_path
@@ -54,7 +54,7 @@ defmodule ExTumblr.FollowersTest do
     Followers.request(context.client, "gunkatana.tumblr.com", nil)
   end
 
-  should "pass the params via the body of the request", context do
+  test "pass the params via the body of the request", context do
     Bypass.expect context.bypass, fn conn ->
       {_, body, _} = Plug.Conn.read_body(conn)
       assert body == "limit=5&offset=1"
@@ -63,7 +63,7 @@ defmodule ExTumblr.FollowersTest do
     Followers.request(context.client, "gunkatana.tumblr.com", %{limit: 5, offset: 1})
   end
 
-  should "pass the oauth credentials via the headers of the request", context do
+  test "pass the oauth credentials via the headers of the request", context do
     Bypass.expect context.bypass, fn conn ->
       oauth_headers = Plug.Conn.get_req_header(conn, "authorization")
       refute oauth_headers in [nil, []]
@@ -72,7 +72,7 @@ defmodule ExTumblr.FollowersTest do
     Followers.request(context.client, "gunkatana.tumblr.com", nil)
   end
 
-  should "parse the http response into a followers struct", context do
+  test "parse the http response into a followers struct", context do
     Bypass.expect context.bypass, fn conn ->
       Plug.Conn.resp conn, 200, @prebaked_response
     end
@@ -109,7 +109,7 @@ defmodule ExTumblr.FollowersTest do
   }
   """
 
-  should "handle successfully a successful response containing 0 followers", context do
+  test "handle successfully a successful response containing 0 followers", context do
     Bypass.expect context.bypass, fn conn ->
       Plug.Conn.resp conn, 200, @prebaked_empty_response
     end

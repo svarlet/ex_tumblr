@@ -1,10 +1,10 @@
-ExUnit.start(formatters: [ShouldI.CLIFormatter])
+ExUnit.start()
 Application.ensure_all_started(:bypass)
 
 defmodule ExTumblr.BypassSetupTemplate do
   defmacro __using__(opts) do
     quote do
-      use ShouldI, unquote(opts)
+      use ExUnit.Case, unquote(opts)
       alias ExTumblr.{Client, Credentials}
 
       setup context do

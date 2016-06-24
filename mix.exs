@@ -7,7 +7,7 @@ defmodule ExTumblr.Mixfile do
      description: "A client for the Tumblr API v2.",
      source_url: "https://github.com/svarlet/ex_tumblr",
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      package: package,
@@ -37,15 +37,14 @@ defmodule ExTumblr.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:httpoison, "~> 0.8.3"},
-     {:poison, "~> 2.1"},
+     {:poison, "~> 2.2"},
      {:oauther, "~> 1.0.2"},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev},
-     {:dialyxir, "~> 0.3", only: [:dev]},
+     {:dialyze, "~> 0.2", only: [:dev]},
      {:mix_test_watch, "~> 0.2", only: :dev},
-     {:shouldi, "~> 0.3.0", only: :test},
      {:bypass, "~> 0.5.1", only: :test},
-     {:credo, "~> 0.3", only: [:dev, :test]}
+     {:credo, "~> 0.4", only: [:dev, :test]}
     ]
   end
 end

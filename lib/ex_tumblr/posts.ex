@@ -3,6 +3,8 @@ defmodule ExTumblr.Post do
   Struct and functions to represent and manage a post.
   """
 
+  alias ExTumblr.Utils.Parsing
+
   @type t :: %__MODULE__{
     blog_name:    String.t,
     id:           non_neg_integer,
@@ -55,6 +57,7 @@ defmodule ExTumblr.Posts do
   use ExTumblr.Transport
 
   alias ExTumblr.{Blog, Info, Post, Client, Auth}
+  alias ExTumblr.Utils.Parsing
 
   @typedoc """
   A struct to represent the response content from the posts endpoint.
