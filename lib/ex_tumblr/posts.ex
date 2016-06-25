@@ -42,6 +42,9 @@ defmodule ExTumblr.Post do
              :total_posts
             ]
 
+  @doc """
+  Transforms a %{String.t => any} into a Post struct.
+  """
   def parse(raw_post) do
     Parsing.to_struct(raw_post, __MODULE__, %__MODULE__{} |> Map.keys |> Enum.map(&to_string/1))
   end
