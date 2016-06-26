@@ -60,7 +60,6 @@ defmodule ExTumblr.Posts do
   use ExTumblr.Transport
 
   alias ExTumblr.{Blog, Info, Post, Client, Auth}
-  alias ExTumblr.Utils.Parsing
 
   @typedoc """
   A struct to represent the response content from the posts endpoint.
@@ -68,10 +67,11 @@ defmodule ExTumblr.Posts do
   """
   @type t :: %__MODULE__{
     blog:  Info.t,
-    posts: [Post.t]
+    posts: [Post.t],
+    total_posts: non_neg_integer
   }
 
-  defstruct [:blog, :posts]
+  defstruct [:blog, :posts, :total_posts]
 
   @spec request(Client.t, String.t, map) :: t
   def request(client, blog_identifier, params) do
@@ -98,7 +98,9 @@ defmodule ExTumblr.Posts do
             |> Info.from_map,
       posts: response
              |> Map.get("posts")
-             |> Enum.map(&Post.parse/1)
+             |> Enum.map(&Post.parse/1),
+      total_posts: response
+                   |> Map.get("total_posts")
     }
   end
 end

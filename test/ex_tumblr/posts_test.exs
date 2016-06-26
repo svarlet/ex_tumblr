@@ -81,8 +81,9 @@ defmodule ExTumblr.PostsTest do
     Bypass.expect context.bypass, fn conn ->
       Plug.Conn.resp conn, 200, @prebaked_response
     end
-    %Posts{blog: blog, posts: posts} = Posts.request(context.client, "peacecorps.tumblr.com", nil)
+    %Posts{blog: blog, posts: posts, total_posts: total_posts} = Posts.request(context.client, "peacecorps.tumblr.com", nil)
     assert blog != nil
-    refute posts in [[], nil]
+    assert Enum.count(posts) == 20
+    assert total_posts == 3156
   end
 end
