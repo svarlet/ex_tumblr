@@ -19,8 +19,7 @@ defmodule ExTumblr.PostTest do
       "source_url"   => "http://localhost/source",
       "source_title" => "title",
       "liked"        => true,
-      "state"        => "published",
-      "total_posts"  => 456
+      "state"        => "published"
     }
 
     expected = %Post{
@@ -38,8 +37,7 @@ defmodule ExTumblr.PostTest do
       source_url:    "http://localhost/source",
       source_title:  "title",
       liked:         true,
-      state:         "published",
-      total_posts:   456
+      state:         "published"
     }
 
     assert expected == Post.parse(raw_map)

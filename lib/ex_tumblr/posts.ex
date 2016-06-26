@@ -20,8 +20,7 @@ defmodule ExTumblr.Post do
     source_url:   String.t,
     source_title: String.t,
     liked:        boolean,
-    state:        String.t,
-    total_posts:  non_neg_integer
+    state:        String.t
   }
 
   defstruct [:blog_name,
@@ -39,7 +38,6 @@ defmodule ExTumblr.Post do
              :source_title,
              :liked,
              :state,
-             :total_posts
             ]
 
   @doc """
