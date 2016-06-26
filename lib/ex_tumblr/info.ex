@@ -58,6 +58,9 @@ defmodule ExTumblr.Info do
 
   @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)
 
+  @doc """
+  Transform a generic map into an `Info` struct.
+  """
   def from_map(raw_map) do
     Parsing.to_struct(raw_map, __MODULE__, @accepted_keys)
   end

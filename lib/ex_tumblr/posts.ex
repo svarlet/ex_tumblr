@@ -73,19 +73,13 @@ defmodule ExTumblr.Posts do
 
   defstruct [:blog, :posts]
 
-  import ExProf.Macro
-
   @spec request(Client.t, String.t, map) :: t
   def request(client, blog_identifier, params) do
-    # profile do
-      blog_identifier
-      |> create_posts_request
-      |> Auth.sign(client, params)
-      |> emit
-      |> parse
-    # end
-    # |> Enum.reduce(0.0, &(&1.percent + &2))
-    # |> inspect
+    blog_identifier
+    |> create_posts_request
+    |> Auth.sign(client, params)
+    |> emit
+    |> parse
   end
 
   defp create_posts_request(blog_identifier) do
@@ -93,14 +87,18 @@ defmodule ExTumblr.Posts do
   end
 
   defp parse({:ok, %HTTPoison.Response{body: body}}) do
-    body
-    |> Poison.decode!
-    |> Map.get("response")
-    |> Parsing.to_struct(__MODULE__, ~w(blog posts))
-    |> parse_each_post
-  end
+    response =
+      body
+      |> Poison.decode!
+      |> Map.get("response")
 
-  defp parse_each_post(%__MODULE__{posts: raw_posts} = posts) do
-    %__MODULE__{posts | posts: Enum.map(raw_posts, &Post.parse/1)}
+    %__MODULE__{
+      blog: response
+            |> Map.get("blog")
+            |> Info.from_map,
+      posts: response
+             |> Map.get("posts")
+             |> Enum.map(&Post.parse/1)
+    }
   end
 end
