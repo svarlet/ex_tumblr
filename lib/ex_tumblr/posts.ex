@@ -17,10 +17,51 @@ defmodule ExTumblr.Post do
     tags:         [String.t],
     bookmarklet:  boolean,
     mobile:       boolean,
-    source_url:   String.t,
-    source_title: String.t,
+    source_url:   String.t, #MOVE TO QUOTE POSTS? see "Notes" column in docs
+    source_title: String.t, #MOVE TO QUOTE POSTS?
     liked:        boolean,
-    state:        String.t
+    state:        String.t,
+    #FOR TEXT POSTS
+    title: String.t,
+    body: String.t,
+    #FOR PHOTO POSTS
+    photos: [], #todo: list of photos objects
+    caption: String.t,
+    width: number(),
+    height: number(),
+    #FOR QUOTE POSTS
+    text: String.t,
+    source: String.t,
+    #FOR LINK POSTS
+    title: String.t, #fixme: already defined for text posts
+    url: String.t,
+    author: String.t,
+    excerpt: String.t,
+    publisher: String.t,
+    photos: [], #fixme: also defined for photo posts
+    description: String.t,
+    #FOR CHAT POSTS
+    title: String.t, #fixme: also defined for link and text posts
+    body: String.t, #fixme: also defined for text posts
+    dialogue: [], #todo: define a type for the contained objects
+    #FOR AUDIO POSTS
+    caption: String.t, #fixme: also defined for photo posts
+    player: String.t,
+    plays: non_neg_integer,
+    album_art: String.t,
+    artist: String.t,
+    album: String.t,
+    track_name: String.t,
+    track_number: non_neg_integer,
+    year: non_neg_integer,
+    #FOR VIDEO POSTS
+    caption: String.t, #fixme: also defined for audio and photo posts
+    player: [], #fixme: also defined for audio posts AND IT'S A DIFFERENT TYPE!!!!
+    #FOR ANSWERS POSTS
+    asking_name: String.t,
+    asking_url: String.t,
+    question: String.t,
+    answer: String.t
   }
 
   defstruct [:blog_name,
@@ -38,6 +79,10 @@ defmodule ExTumblr.Post do
              :source_title,
              :liked,
              :state,
+             # FOR TEXT POSTS
+             :title,
+             :body,
+             #
             ]
 
   @doc """
