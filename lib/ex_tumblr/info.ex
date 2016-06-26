@@ -41,7 +41,7 @@ defmodule ExTumblr.Info do
     |> create_info_request
     |> Auth.sign(client, nil)
     |> emit
-    |> parse
+    |> parse_http_response
   end
 
   @spec create_info_request(String.t) :: tuple
@@ -49,12 +49,16 @@ defmodule ExTumblr.Info do
     {:get, Blog.path_for(blog_identifier, "info"), :api_key_auth}
   end
 
-  @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)
-
-  defp parse({:ok, %HTTPoison.Response{body: body}}) do
+  defp parse_http_response({:ok, %HTTPoison.Response{body: body}}) do
     body
     |> Poison.decode!
     |> get_in(["response", "blog"])
-    |> Parsing.to_struct(__MODULE__, @accepted_keys)
+    |> from_map
+  end
+
+  @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)
+
+  def from_map(raw_map) do
+    Parsing.to_struct(raw_map, __MODULE__, @accepted_keys)
   end
 end
