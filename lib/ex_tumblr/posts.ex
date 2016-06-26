@@ -73,13 +73,19 @@ defmodule ExTumblr.Posts do
 
   defstruct [:blog, :posts]
 
+  import ExProf.Macro
+
   @spec request(Client.t, String.t, map) :: t
   def request(client, blog_identifier, params) do
-    blog_identifier
-    |> create_posts_request
-    |> Auth.sign(client, params)
-    |> emit
-    |> parse
+    # profile do
+      blog_identifier
+      |> create_posts_request
+      |> Auth.sign(client, params)
+      |> emit
+      |> parse
+    # end
+    # |> Enum.reduce(0.0, &(&1.percent + &2))
+    # |> inspect
   end
 
   defp create_posts_request(blog_identifier) do
