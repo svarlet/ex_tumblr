@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.12.0">
-    <title>ExTumblr.Follower – ExTumblr v0.0.1</title>
+    <title>ExTumblr.Post.PhotoItem – ExTumblr v0.0.1</title>
     <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -59,22 +59,15 @@
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.Follower
+        ExTumblr.Post.PhotoItem
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/followers.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/post/photo_item.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
       </h1>
 
-      
-        <section id="moduledoc" class="docstring">
-          <p>Define a struct and functions to manage a blog follower.
-See <a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a>
-about the followers endpoint.</p>
-
-        </section>
       
 
       
@@ -95,10 +88,6 @@ about the followers endpoint.</p>
     <a href="#t:t/0">t()</a>
   </div>
   
-    <div class="summary-synopsis"><p>A struct representing a blog follower.
-<a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a></p>
-</div>
-  
 </div>
 
   </div>
@@ -111,10 +100,10 @@ about the followers endpoint.</p>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#parse/1">parse(raw_map)</a>
+    <a href="#parse/1">parse(map)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Transform a map into a Follower struct</p>
+    <div class="summary-synopsis"><p>Creates a struct from a <code class="inline">String.t</code> to <code class="inline">any</code> map</p>
 </div>
   
 </div>
@@ -139,11 +128,7 @@ about the followers endpoint.</p>
           </h1>
           <div class="types-list">
             <div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Follower{following: boolean, name: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, updated: non_neg_integer, url: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
-  
-    <div class="typespec-doc"><p>A struct representing a blog follower.
-<a href="https://www.tumblr.com/docs/en/api/v2#blog-followers">Official documentation</a></p>
-</div>
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Post.PhotoItem{alt_sizes: [<a href="ExTumblr.Post.PhotoMeta.html#t:t/0">ExTumblr.Post.PhotoMeta.t</a>], caption: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, original_size: <a href="ExTumblr.Post.PhotoMeta.html#t:t/0">ExTumblr.Post.PhotoMeta.t</a>}</code></pre>
   
 </div>
 
@@ -164,9 +149,9 @@ about the followers endpoint.</p>
     <a href="#parse/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">parse(raw_map)</span>
+    <span class="signature">parse(map)</span>
     
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/followers.ex#L32" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/post/photo_item.ex#L29" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -177,14 +162,24 @@ about the followers endpoint.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">parse(%{optional(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) => any}) :: <a href="#t:t/0">t</a></code></pre>
+          <pre><code class="elixir">parse(map) :: <a href="#t:t/0">t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Transform a map into a Follower struct.</p>
-<p>Keys must be strings, values can be any type.</p>
+    <p>Creates a struct from a <code class="inline">String.t</code> to <code class="inline">any</code> map.</p>
+<p>It reads the values from the <code class="inline">&quot;caption&quot;</code> and <code class="inline">&quot;alt_sizes&quot;</code> properties.
+It expects the latter to be a list and will transform each item to a
+<code class="inline">PhotoMeta</code> struct.</p>
+<pre><code class="iex elixir">iex&gt; original_size = %{&quot;width&quot; =&gt; 1200, &quot;height&quot; =&gt; 1600, url: &quot;http://a.url.com/pic.jpg&quot;}
+iex&gt; alt_sizes = [
+...&gt;   %{&quot;width&quot; =&gt; 600, &quot;height&quot; =&gt; 800, url: &quot;http://a.url.com/pic1.jpg&quot;},
+...&gt;   %{&quot;width&quot; =&gt; 300, &quot;height&quot; =&gt; 400, url: &quot;http://a.url.com/pic2.jpg&quot;}
+...&gt; ]
+iex&gt; map = %{&quot;caption&quot; =&gt; &quot;Las Vegas 2014&quot;, &quot;original_size&quot; =&gt; original_size, &quot;alt_sizes&quot; =&gt; alt_sizes}
+iex&gt; ExTumblr.Post.PhotoItem.parse(map)
+%ExTumblr.Post.PhotoItem{caption: &quot;Las Vegas 2014&quot;, alt_sizes: [%ExTumblr.Post.PhotoMeta{width: 600, height: 800, url: &quot;http://a.url.com/pic1.jpg&quot;}, %ExTumblr.Post.PhotoMeta{width: 300, height: 400, url: &quot;http://a.url.com/pic2.jpg&quot;}]}</code></pre>
 
   </section>
 </div>

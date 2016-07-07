@@ -59,6 +59,6 @@ defmodule ExTumblr.InfoTest do
         ask_anon:                false,
         is_blocked_from_primary: false
       }
-    assert expected == Info.request(context.client, "gunkatana.tumblr.com")
+    assert Info.request(context.client, "gunkatana.tumblr.com") == expected
   end
 end

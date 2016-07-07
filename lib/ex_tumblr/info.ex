@@ -50,10 +50,15 @@ defmodule ExTumblr.Info do
   end
 
   defp parse_http_response({:ok, %HTTPoison.Response{body: body}}) do
+    # body
+    # |> Poison.decode!
+    # |> get_in(["response", "blog"])
+    # |> from_map
+
     body
-    |> Poison.decode!
-    |> get_in(["response", "blog"])
-    |> from_map
+    |> Poison.decode!(as: %ExTumblr.ResponseEnvelope{meta: ExTumblr.ResponseMetadata, response: %{body: %__MODULE__{}}})
+    |> IO.inspect
+    |> get_in([:response, :body])
   end
 
   @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)

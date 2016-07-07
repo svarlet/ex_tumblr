@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.11.5">
-    <title>ExTumblr.Post – ExTumblr v0.0.1</title>
-    <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
+    <meta name="generator" content="ExDoc v0.12.0">
+    <title>ExTumblr.Post.Posts – ExTumblr v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -17,9 +17,6 @@
   <i class="icon-menu"></i>
 </button>
 <section class="sidebar">
-  <button class="sidebar-toggle">
-    <i class="icon-menu"></i>
-  </button>
 
   
   <a href="api-reference.html" class="sidebar-projectLink">
@@ -56,15 +53,16 @@
 </section>
 
 <section class="content">
-  <div id="content" class="content-inner">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
 
 
       <h1>
         <small class="visible-xs">ExTumblr v0.0.1</small>
-        ExTumblr.Post
+        ExTumblr.Post.Posts
         
         
-          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/posts.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/post/posts.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,7 +70,8 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Struct and functions to represent and manage a post.</p>
+          <p>Types and functions to retrieves blog posts.
+<a href="https://www.tumblr.com/docs/en/api/v2#posts">Official documentation</a></p>
 
         </section>
       
@@ -95,6 +94,10 @@
     <a href="#t:t/0">t()</a>
   </div>
   
+    <div class="summary-synopsis"><p>A struct to represent the response content from the posts endpoint.
+<a href="https://www.tumblr.com/docs/en/api/v2#posts">Official documentation</a></p>
+</div>
+  
 </div>
 
   </div>
@@ -107,7 +110,7 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#parse/1">parse(raw_post)</a>
+    <a href="#request/3">request(client, blog_identifier, params)</a>
   </div>
   
 </div>
@@ -132,7 +135,11 @@
           </h1>
           <div class="types-list">
             <div id="t:t/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Post{blog_name: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, bookmarklet: boolean, date: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, format: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, id: non_neg_integer, liked: boolean, mobile: boolean, post_url: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, reblog_key: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, source_title: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, source_url: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, state: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, tags: [<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>], timestamp: non_neg_integer, total_posts: non_neg_integer, type: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %ExTumblr.Post.Posts{blog: <a href="ExTumblr.Info.html#t:t/0">ExTumblr.Info.t</a>, posts: [<a href="ExTumblr.Post.CommonPostData.html#t:t/0">ExTumblr.Post.CommonPostData.t</a>], total_posts: non_neg_integer}</code></pre>
+  
+    <div class="typespec-doc"><p>A struct to represent the response content from the posts endpoint.
+<a href="https://www.tumblr.com/docs/en/api/v2#posts">Official documentation</a></p>
+</div>
   
 </div>
 
@@ -148,18 +155,28 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="parse/1">
+          <div class="detail" id="request/3">
   <div class="detail-header">
-    <a href="#parse/1" class="detail-link" title="Link to this function">
+    <a href="#request/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">parse(raw_post)</span>
-      
-      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/posts.ex#L45" class="view-source" rel="help" title="View Source">
+    <span class="signature">request(client, blog_identifier, params)</span>
+    
+      <a href="https://github.com/svarlet/ex_tumblr/blob/master/lib/ex_tumblr/post/posts.ex#L25" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
+    
   </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">request(<a href="ExTumblr.Client.html#t:t/0">ExTumblr.Client.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, map) :: <a href="#t:t/0">t</a></code></pre>
+        
+      </div>
+    </div>
   
   <section class="docstring">
     
@@ -172,23 +189,24 @@
       
 
       
-        <footer class="footer">
-      <p>
-        <span class="line">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.5),
-        </span>
-        <span class="line">
-          designed by
-          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
           </span>
-      </p>
-      <button class="night-mode-toggle" />
-    </footer>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-918614602f.js"></script>
+  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
 
