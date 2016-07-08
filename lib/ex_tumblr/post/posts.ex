@@ -43,7 +43,7 @@ defmodule ExTumblr.Post.Posts do
     %__MODULE__{
       blog: response
             |> Map.get("blog")
-            |> Info.from_map,
+            |> Info.to_struct,
       posts: response
              |> Map.get("posts")
              |> Enum.map(&CommonPostData.parse/1),

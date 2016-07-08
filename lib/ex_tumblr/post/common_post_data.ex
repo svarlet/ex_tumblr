@@ -38,12 +38,6 @@ defmodule ExTumblr.Post.CommonPostData do
 
   def parse(raw_post) do
     raw_post
-    |> Parsing.to_struct(__MODULE__, struct_keys_as_strings)
-  end
-
-  defp struct_keys_as_strings do
-    %__MODULE__{}
-    |> Map.keys
-    |> Enum.map(&to_string/1)
+    |> Parsing.to_struct(__MODULE__)
   end
 end

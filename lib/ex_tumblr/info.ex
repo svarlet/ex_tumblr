@@ -50,23 +50,16 @@ defmodule ExTumblr.Info do
   end
 
   defp parse_http_response({:ok, %HTTPoison.Response{body: body}}) do
-    # body
-    # |> Poison.decode!
-    # |> get_in(["response", "blog"])
-    # |> from_map
-
     body
-    |> Poison.decode!(as: %ExTumblr.ResponseEnvelope{meta: ExTumblr.ResponseMetadata, response: %{body: %__MODULE__{}}})
-    |> IO.inspect
-    |> get_in([:response, :body])
+    |> Poison.decode!
+    |> get_in(["response", "blog"])
+    |> to_struct
   end
-
-  @accepted_keys ~w(title posts name updated description ask ask_anon likes is_blocked_from_primary)
 
   @doc """
   Transform a generic map into an `Info` struct.
   """
-  def from_map(raw_map) do
-    Parsing.to_struct(raw_map, __MODULE__, @accepted_keys)
+  def to_struct(raw_map) do
+    Parsing.to_struct(raw_map, __MODULE__)
   end
 end

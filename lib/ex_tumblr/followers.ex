@@ -30,7 +30,7 @@ defmodule ExTumblr.Follower do
   """
   @spec parse(%{String.t => any}) :: t
   def parse(raw_map) do
-    Parsing.to_struct(raw_map, __MODULE__, ~w(name following url updated))
+    Parsing.to_struct(raw_map, __MODULE__)
   end
 end
 
@@ -70,7 +70,7 @@ defmodule ExTumblr.Followers do
     body
     |> Poison.decode!
     |> Map.get("response")
-    |> Parsing.to_struct(__MODULE__, ~w(total_users users))
+    |> Parsing.to_struct(__MODULE__)
     |> parse_each_follower
   end
 

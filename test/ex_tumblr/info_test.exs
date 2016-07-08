@@ -15,7 +15,7 @@ defmodule ExTumblr.InfoTest do
         "name":           "gunkatana",
         "total_posts":    13,
         "posts":          13,
-        "url":            "http: //gunkatana.tumblr.com/",
+        "url":            "http://gunkatana.tumblr.com/",
         "updated":        1455328457,
         "description":    "desc",
         "is_nsfw":        false,

@@ -12,14 +12,7 @@ defmodule ExTumblr.Post.PostParser do
 
   defp parse_common_keys(raw_post) do
     raw_post
-    |> Parsing.to_struct(CommonPostData, string_keys_of(CommonPostData))
-  end
-
-  defp string_keys_of(module) do
-    module
-    |> struct
-    |> Map.keys
-    |> Enum.map(&to_string/1)
+    |> Parsing.to_struct(CommonPostData)
   end
 
   def parse(%{"type" => "text"} = raw_post) do

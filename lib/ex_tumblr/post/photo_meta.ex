@@ -20,9 +20,9 @@ defmodule ExTumblr.Post.PhotoMeta do
   @spec parse(%{String.t => any}) :: t
   def parse(map) when is_map(map) do
     %__MODULE__{
-      width:  Map.get(map, "width"),
-      height: Map.get(map, "height"),
-      url:    Map.get(map, "url")
+      width:  map["width"],
+      height: map["height"],
+      url:    map["url"]
     }
   end
 end
