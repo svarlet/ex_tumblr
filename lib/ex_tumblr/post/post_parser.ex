@@ -11,8 +11,7 @@ defmodule ExTumblr.Post.PostParser do
   # alias ExTumblr.Post.AnswerPost
 
   defp parse_common_keys(raw_post) do
-    raw_post
-    |> Parsing.to_struct(CommonPostData)
+    Parsing.to_struct(raw_post, CommonPostData)
   end
 
   def parse(%{"type" => "text"} = raw_post) do
