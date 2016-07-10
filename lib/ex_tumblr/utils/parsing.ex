@@ -23,6 +23,23 @@ defmodule ExTumblr.Utils.Parsing do
     struct module, atomized_kvs
   end
 
+  @doc """
+  Same as to_struct/2 but enable the developer to specify custom key-value
+  transformers.
+
+  This is useful when the original map has a key mapped to a map or to a list
+  of map which should be parsed to specific types.
+  """
+  def to_struct(data, module, transformers) when transformers in [[], nil] do
+    to_struct(data, module)
+  end
+
+  def to_struct(data, module, [{key, transformer} | rest]) do
+    key_as_string = to_string(key)
+    updated_data = %{data | key_as_string => transformer.(data[key_as_string])}
+    to_struct(updated_data, module, rest)
+  end
+
   defp atomize_tuple({k, v}) when is_binary(k) do
     try do
       {:ok, {String.to_existing_atom(k), v}}
