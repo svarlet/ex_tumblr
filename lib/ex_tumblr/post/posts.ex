@@ -41,14 +41,9 @@ defmodule ExTumblr.Post.Posts do
       |> Map.get("response")
 
     %__MODULE__{
-      blog: response
-            |> Map.get("blog")
-            |> Info.to_struct,
-      posts: response
-             |> Map.get("posts")
-             |> Enum.map(&CommonPostData.parse/1),
-      total_posts: response
-                   |> Map.get("total_posts")
+      blog:        Info.to_struct(response["blog"]),
+      posts:       Enum.map(response["posts"], &CommonPostData.parse/1),
+      total_posts: response["total_posts"]
     }
   end
 end

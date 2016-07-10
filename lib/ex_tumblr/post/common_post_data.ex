@@ -37,7 +37,6 @@ defmodule ExTumblr.Post.CommonPostData do
             ]
 
   def parse(raw_post) do
-    raw_post
-    |> Parsing.to_struct(__MODULE__)
+    Parsing.to_struct(raw_post, __MODULE__)
   end
 end
