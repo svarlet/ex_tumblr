@@ -28,9 +28,7 @@ defmodule ExTumblr.Post.PostParser do
       caption: raw_post["caption"],
       width:   raw_post["width"],
       height:  raw_post["height"],
-      photos:  raw_post
-               |> Map.get("photos")
-               |> Enum.map(&PhotoItem.parse/1)
+      photos:  Enum.map(raw_post["photos"], &PhotoItem.parse/1)
     }
   end
 
