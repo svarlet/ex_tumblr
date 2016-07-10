@@ -17,17 +17,17 @@ defmodule ExTumblr.Post.PostParser do
   def parse(%{"type" => "text"} = raw_post) do
     %TextPost{
       base:  parse_common_keys(raw_post),
-      title: Map.get(raw_post, "title"),
-      body:  Map.get(raw_post, "body")
+      title: raw_post["title"],
+      body:  raw_post["body"]
     }
   end
 
   def parse(%{"type" => "photo"} = raw_post) do
     %PhotoPost{
       base:    parse_common_keys(raw_post),
-      caption: Map.get(raw_post, "caption"),
-      width:   Map.get(raw_post, "width"),
-      height:  Map.get(raw_post, "height"),
+      caption: raw_post["caption"],
+      width:   raw_post["width"],
+      height:  raw_post["height"],
       photos:  raw_post
                |> Map.get("photos")
                |> Enum.map(&PhotoItem.parse/1)
@@ -37,23 +37,21 @@ defmodule ExTumblr.Post.PostParser do
   def parse(%{"type" => "quote"} = raw_post) do
     %QuotePost{
       base:   parse_common_keys(raw_post),
-      text:   Map.get(raw_post, "text"),
-      source: Map.get(raw_post, "source")
+      text:   raw_post["text"],
+      source: raw_post["source"]
     }
   end
 
   def parse(%{"type" => "link"} = raw_post) do
     %LinkPost{
-      base:        Map.get(raw_post, "base"),
-      title:       Map.get(raw_post, "title"),
-      url:         Map.get(raw_post, "url"),
-      author:      Map.get(raw_post, "author"),
-      excerpt:     Map.get(raw_post, "excerpt"),
-      publisher:   Map.get(raw_post, "publisher"),
-      photos:      raw_post
-                   |> Map.get("photos")
-                   |> Enum.map(&PhotoItem.parse/1),
-      description: Map.get(raw_post, "description")
+      base:        raw_post["base"],
+      title:       raw_post["title"],
+      url:         raw_post["url"],
+      author:      raw_post["author"],
+      excerpt:     raw_post["excerpt"],
+      publisher:   raw_post["publisher"],
+      photos:      Enum.map(raw_post["photos"], &PhotoItem.parse/1),
+      description: raw_post["description"]
     }
   end
 
