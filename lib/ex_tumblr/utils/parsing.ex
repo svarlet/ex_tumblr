@@ -37,6 +37,8 @@ defmodule ExTumblr.Utils.Parsing do
 
   This is useful when the original map has a key mapped to a map or to a list
   of map which should be parsed to specific types.
+
+  The transformers must be a Keyword associating atom keys to unary functions.
   """
   def to_struct(data, module, transformers) when transformers in [[], nil] do
     to_struct(data, module)
@@ -44,7 +46,11 @@ defmodule ExTumblr.Utils.Parsing do
 
   def to_struct(data, module, [{key, transformer} | rest]) do
     key_as_string = to_string(key)
-    updated_data = %{data | key_as_string => transformer.(data[key_as_string])}
-    to_struct(updated_data, module, rest)
+    if (Map.has_key? struct(module), key) do
+      updated_data = %{data | key_as_string => transformer.(data[key_as_string])}
+      to_struct(updated_data, module, rest)
+    else
+      to_struct(data, module, rest)
+    end
   end
 end

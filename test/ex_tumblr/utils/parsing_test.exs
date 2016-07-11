@@ -34,18 +34,47 @@ defmodule ExTumblr.Utils.ParsingTest do
   #
 
   test "to_struct/3 can convert a map to a struct even with a nil list of converters" do
-    flunk "todo"
+    expected = %DummyUser{firstname: "sebastien", lastname: "varlet"}
+    actual =
+      Parsing.to_struct(
+        %{"firstname" => "sebastien", "lastname" => "varlet"},
+        DummyUser,
+        nil
+      )
+    assert expected == actual
   end
 
   test "to_struct/3 can convert a map to a struct even with an empty list of converters" do
-    flunk "todo"
+    expected = %DummyUser{firstname: "sebastien", lastname: "varlet"}
+    actual =
+      Parsing.to_struct(
+        %{"firstname" => "sebastien", "lastname" => "varlet"},
+        DummyUser,
+        []
+      )
+    assert expected == actual
   end
 
   test "to_struct/3 does not run a converter if the associated key does not exist" do
-    flunk "todo"
+    expected = %DummyUser{firstname: "sebastien", lastname: "varlet"}
+    actual =
+      Parsing.to_struct(
+        %{"firstname" => "sebastien", "lastname" => "varlet"},
+        DummyUser,
+        nonexistant_key: &(&1)
+      )
+    assert expected == actual
   end
 
   test "to_struct/3 run all provided converters" do
-    flunk "todo"
+    expected = %DummyUser{firstname: "SEBASTIEN", lastname: "_varlet_"}
+    actual =
+      Parsing.to_struct(
+        %{"firstname" => "sebastien", "lastname" => "varlet"},
+        DummyUser,
+        firstname: &(String.upcase(&1)),
+        lastname: &("_#{&1}_")
+      )
+    assert expected == actual
   end
 end
