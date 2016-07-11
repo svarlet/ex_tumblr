@@ -23,6 +23,14 @@ defmodule ExTumblr.Utils.Parsing do
     struct module, atomized_kvs
   end
 
+  defp atomize_tuple({k, v}) when is_binary(k) do
+    try do
+      {:ok, {String.to_existing_atom(k), v}}
+    rescue
+      ArgumentError -> {:error, :unregistered_atom}
+    end
+  end
+
   @doc """
   Same as to_struct/2 but enable the developer to specify custom key-value
   transformers.
@@ -38,13 +46,5 @@ defmodule ExTumblr.Utils.Parsing do
     key_as_string = to_string(key)
     updated_data = %{data | key_as_string => transformer.(data[key_as_string])}
     to_struct(updated_data, module, rest)
-  end
-
-  defp atomize_tuple({k, v}) when is_binary(k) do
-    try do
-      {:ok, {String.to_existing_atom(k), v}}
-    rescue
-      ArgumentError -> {:error, :unregistered_atom}
-    end
   end
 end
