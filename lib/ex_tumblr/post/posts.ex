@@ -7,7 +7,6 @@ defmodule ExTumblr.Post.Posts do
   use ExTumblr.Transport
 
   alias ExTumblr.{Blog, Info, Client, Auth}
-  alias ExTumblr.Post.CommonPostData
 
   @typedoc """
   A struct to represent the response content from the posts endpoint.

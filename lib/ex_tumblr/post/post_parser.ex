@@ -1,6 +1,5 @@
 defmodule ExTumblr.Post.PostParser do
   alias ExTumblr.Utils.Parsing
-  alias ExTumblr.Post.CommonPostData
   alias ExTumblr.Post.TextPost
   alias ExTumblr.Post.{PhotoPost, PhotoItem}
   alias ExTumblr.Post.QuotePost
@@ -10,47 +9,20 @@ defmodule ExTumblr.Post.PostParser do
   # alias ExTumblr.Post.VideoPost
   # alias ExTumblr.Post.AnswerPost
 
-  defp parse_common_keys(raw_post) do
-    Parsing.to_struct(raw_post, CommonPostData)
-  end
-
   def parse(%{"type" => "text"} = raw_post) do
-    %TextPost{
-      base:  parse_common_keys(raw_post),
-      title: raw_post["title"],
-      body:  raw_post["body"]
-    }
+    Parsing.to_struct(raw_post, TextPost)
   end
 
   def parse(%{"type" => "photo"} = raw_post) do
-    %PhotoPost{
-      base:    parse_common_keys(raw_post),
-      caption: raw_post["caption"],
-      width:   raw_post["width"],
-      height:  raw_post["height"],
-      photos:  Enum.map(raw_post["photos"], &PhotoItem.parse/1)
-    }
+    Parsing.to_struct(raw_post, PhotoPost, photos: fn list -> Enum.map(list, &PhotoItem.parse/1) end)
   end
 
   def parse(%{"type" => "quote"} = raw_post) do
-    %QuotePost{
-      base:   parse_common_keys(raw_post),
-      text:   raw_post["text"],
-      source: raw_post["source"]
-    }
+    Parsing.to_struct(raw_post, QuotePost)
   end
 
   def parse(%{"type" => "link"} = raw_post) do
-    %LinkPost{
-      base:        raw_post["base"],
-      title:       raw_post["title"],
-      url:         raw_post["url"],
-      author:      raw_post["author"],
-      excerpt:     raw_post["excerpt"],
-      publisher:   raw_post["publisher"],
-      photos:      Enum.map(raw_post["photos"], &PhotoItem.parse/1),
-      description: raw_post["description"]
-    }
+    Parsing.to_struct(raw_post, LinkPost, photos: fn list -> Enum.map(list, &PhotoItem.parse/1) end)
   end
 
   # def parse(%{"type" => "chat"} = raw_post) do
