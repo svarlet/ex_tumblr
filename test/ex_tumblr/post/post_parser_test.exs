@@ -102,7 +102,7 @@ defmodule ExTumblr.Post.PostParserTest do
     actual =
       context.raw_post
       |> Map.put_new("type", "photo")
-      |> Map.put_new("photos", the_photos)
+      |> Map.put_new("photos", unparsed_photos)
       |> PostParser.parse
     assert expected == actual
   end
