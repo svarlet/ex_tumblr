@@ -14,7 +14,9 @@ defmodule ExTumblr.Post.PostParser do
   end
 
   def parse(%{"type" => "photo"} = raw_post) do
-    Parsing.to_struct(raw_post, PhotoPost, photos: fn list -> Enum.map(list, &PhotoItem.parse/1) end)
+    Parsing.to_struct(raw_post, PhotoPost,
+      photos: fn list -> Enum.map(list, &PhotoItem.parse/1) end
+    )
   end
 
   def parse(%{"type" => "quote"} = raw_post) do
@@ -22,7 +24,9 @@ defmodule ExTumblr.Post.PostParser do
   end
 
   def parse(%{"type" => "link"} = raw_post) do
-    Parsing.to_struct(raw_post, LinkPost, photos: fn list -> Enum.map(list, &PhotoItem.parse/1) end)
+    Parsing.to_struct(raw_post, LinkPost,
+      photos: fn list -> Enum.map(list, &PhotoItem.parse/1) end
+    )
   end
 
   # def parse(%{"type" => "chat"} = raw_post) do
