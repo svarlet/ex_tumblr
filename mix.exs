@@ -45,7 +45,9 @@ defmodule ExTumblr.Mixfile do
      {:mix_test_watch, "~> 0.2", only: :dev},
      {:bypass, "~> 0.5.1", only: :test},
      {:exprof, "~> 0.2.0", only: [:test, :dev]},
-     {:credo, "~> 0.4", only: [:dev, :test]}
+     {:credo, "~> 0.4", only: [:dev, :test]},
+     {:excheck, "~> 0.4.1", only: :test},
+     {:triq, github: "krestenkrab/triq", only: :test}
     ]
   end
 end
