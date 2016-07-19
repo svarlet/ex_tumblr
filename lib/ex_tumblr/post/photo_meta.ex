@@ -13,9 +13,17 @@ defmodule ExTumblr.Post.PhotoMeta do
   This function reads the value of the `"width"`, `"height"` and `"url"` keys to
   create the struct.
 
-      iex> generic_map = %{"width" => 8, "height" => 12, "url" => "http://localhost/pic.jpg" }
+      iex> generic_map = %{
+      ...>   "width" => 8,
+      ...>   "height" => 12,
+      ...>   "url" => "http://localhost/pic.jpg"
+      ...> }
       iex> ExTumblr.Post.PhotoMeta.parse(generic_map)
-      %ExTumblr.Post.PhotoMeta{width: 8, height: 12, url: "http://localhost/pic.jpg"}
+      %ExTumblr.Post.PhotoMeta{
+        width: 8,
+        height: 12,
+        url: "http://localhost/pic.jpg"
+      }
   """
   @spec parse(%{String.t => any}) :: t
   def parse(map) when is_map(map) do
