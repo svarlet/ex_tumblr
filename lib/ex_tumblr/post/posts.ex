@@ -6,6 +6,7 @@ defmodule ExTumblr.Post.Posts do
 
   use ExTumblr.Transport
 
+  alias ExTumblr.Post.PostParser
   alias ExTumblr.{Blog, Info, Client, Auth}
 
   @typedoc """
@@ -14,7 +15,7 @@ defmodule ExTumblr.Post.Posts do
   """
   @type t :: %__MODULE__{
     blog:        Info.t,
-    posts:       [CommonPostData.t],
+    posts:       [any],
     total_posts: non_neg_integer
   }
 
@@ -41,7 +42,7 @@ defmodule ExTumblr.Post.Posts do
 
     %__MODULE__{
       blog:        Info.to_struct(response["blog"]),
-      posts:       Enum.map(response["posts"], &CommonPostData.parse/1),
+      posts:       Enum.map(response["posts"], &PostParser.parse/1),
       total_posts: response["total_posts"]
     }
   end
