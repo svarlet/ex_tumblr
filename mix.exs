@@ -8,6 +8,7 @@ defmodule ExTumblr.Mixfile do
      source_url: "https://github.com/svarlet/ex_tumblr",
      version: "0.0.1",
      elixir: "~> 1.3",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      package: package,
@@ -20,6 +21,10 @@ defmodule ExTumblr.Mixfile do
   def application do
     [applications: [:logger, :httpoison]]
   end
+
+  # Specifies which paths to compile per environment
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   defp package do
     [licenses: ["MIT"],
