@@ -1,8 +1,8 @@
 defmodule ExTumblr.Post.PostParserTest do
   use ExUnit.Case, async: true
+  use PropCheck
 
   alias ExTumblr.Post.{PostParser, TextPost, PhotoPost}
-  alias ExTumblr.Post.{PhotoItem, PhotoMeta}
 
   setup_all do
     {:ok, raw_post: %{
@@ -45,6 +45,10 @@ defmodule ExTumblr.Post.PostParserTest do
       |> PostParser.parse
 
     assert expected == actual
+  end
+
+  property "parse/1 can parse a photo post", [:verbose], context do
+    false
   end
 
 end

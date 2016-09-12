@@ -2,30 +2,11 @@ defmodule ExTumblr.Post.PhotoItemTest do
   use ExUnit.Case, async: true
   use PropCheck
 
+  alias ExTumblr.Support.Generators.Post.PhotoGen
   alias ExTumblr.Post.PhotoItem
 
-  defp url_gen, do: elements ["url1", "url2"]
-
-  defp photo_meta_gen do
-    let [width, height, url] <- [nat, nat, url_gen] do
-      %{"width" => width,
-        "height" => height,
-        "url" => url}
-    end
-  end
-
-  defp caption_gen, do: elements ["", "caption"]
-
-  defp photo_item_gen do
-    let [caption, original_size, alt_sizes] <- [caption_gen, photo_meta_gen, list(photo_meta_gen)] do
-      %{"caption" => caption,
-        "original_size" => original_size,
-        "alt_sizes" => alt_sizes}
-    end
-  end
-
-  property "all properties are parsed" do
-    forall raw_photo_item <- photo_item_gen do
+  property "caption, original_size and alt_sizes keys are parsed" do
+    forall raw_photo_item <- PhotoGen.photo_item do
       photo_item =
         raw_photo_item
         |> PhotoItem.parse
